@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:QuizAppProj.ViewModel"
+                    xmlns:view="clr-namespace:QuizAppProj.View">
+
+    <DataTemplate DataType="{x:Type vm:HomeVM}">
+        <view:Home />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:UserVM}">
+        <view:User />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:CreateQuizVM}">
+        <view:CreateQuiz />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SettingsVM}">
+        <view:Settings/>
+    </DataTemplate>
+
+</ResourceDictionary>
