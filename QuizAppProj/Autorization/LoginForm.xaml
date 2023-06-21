@@ -16,6 +16,7 @@
                 <TextBox x:Name="loginTextBox" Margin="71,73,71,159" RenderTransformOrigin="0.5,0.292"/>
                 <PasswordBox x:Name="passwordBox" Margin="71,104,71,128"/>
                 <Button Click="AutorizeEventArg" Content="Войти" Margin="142,142,142,79"/>
+                <Button Click="RegFormNavigation" Background="Transparent" Content="Войти" Margin="142,211,142,10"/>
             </Grid>
         </Border>
     </Grid>

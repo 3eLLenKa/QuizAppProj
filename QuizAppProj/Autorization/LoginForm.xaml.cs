@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace QuizAppProj.Autorization
 {
@@ -22,10 +25,14 @@ namespace QuizAppProj.Autorization
     /// </summary>
     public partial class LoginForm : Page
     {
-        private ConnectToDatabase connect = new ConnectToDatabase();
         public LoginForm()
         {
             InitializeComponent();
+        }
+
+        private void RegFormNavigation(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new RegForm());
         }
         private void AutorizeEventArg(object sender, EventArgs e)
         {
@@ -53,6 +60,10 @@ namespace QuizAppProj.Autorization
 
             if (count > 0)
             {
+                int uid = GetUID();
+
+                File.WriteAllText(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Autorization\QuizAppUID.txt", uid.ToString());
+
                 MessageBox.Show("Авторизация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.Navigate(new MainPage());
             }
@@ -62,6 +73,37 @@ namespace QuizAppProj.Autorization
             }
 
             connection.Close();
+        }
+
+        private int GetUID()
+        {
+            var loginUser = loginTextBox.Text;
+            var passwordUser = passwordBox.Password;
+
+            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+
+            connection.Open();
+
+            string query = "SELECT id FROM Users WHERE login = @Login AND password = @Password";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@Login", loginUser);
+            command.Parameters.AddWithValue("@Password", passwordUser);
+
+            int count = (int)command.ExecuteScalar();
+
+            if (count > 0)
+            {
+                int userId = Convert.ToInt32(command.ExecuteScalar());
+                connection.Close();
+                return userId;
+            }
+            else
+            {
+                connection.Close();
+                return -1;
+            }
         }
     }
 }
