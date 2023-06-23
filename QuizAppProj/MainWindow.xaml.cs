@@ -28,15 +28,36 @@ namespace QuizAppProj
         public static MainWindow window;
         public MainWindow()
         {
-            window = this;
-
-            InitializeComponent();
-
-            if (!CheckSession())
+            try
             {
-                MainFrame.Content = new LoginForm();
+                window = this;
+
+                InitializeComponent();
+
+                if (!CheckSession())
+                {
+                    MainFrame.Content = new LoginForm();
+                }
+                else MainFrame.Content = new MainPage();
             }
-            else MainFrame.Content = new MainPage();
+            catch (Exception)
+            {
+                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                string uid = utilities.ReadUID();
+
+                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+
+                connection.Open();
+
+                string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@UID", uid);
+                command.ExecuteNonQuery();
+
+                connection.Close();
+            }
         }
         private void CloseApp_Click(object sender, RoutedEventArgs e)
         {

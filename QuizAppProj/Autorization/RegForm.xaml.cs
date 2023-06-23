@@ -43,32 +43,58 @@ namespace QuizAppProj.Autorization
                 return;
             }
 
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+            try
+            {
+                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
 
-            connection.Open();
+                connection.Open();
 
-            string query = "INSERT INTO Users(login, password, is_admin, isAutorized, reg_date) values(@Login, @Password, 0, 1, @RegDate)";
+                string query = "INSERT INTO Users(login, password, is_admin, isAutorized, reg_date) values(@Login, @Password, 0, 1, @RegDate)";
 
-            SqlCommand command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand(query, connection);
 
-            command.Parameters.AddWithValue("@Login", loginUser);
-            command.Parameters.AddWithValue("@Password", passwordUser);
-            command.Parameters.AddWithValue("@RegDate", regDate);
+                command.Parameters.AddWithValue("@Login", loginUser);
+                command.Parameters.AddWithValue("@Password", passwordUser);
+                command.Parameters.AddWithValue("@RegDate", regDate);
 
-            if (command.ExecuteNonQuery() == 1)
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    SessionCheckUtilities utilities = new SessionCheckUtilities();
+
+                    int uid = utilities.GetUID(loginUser, passwordUser);
+                    utilities.WriteUID(uid);
+
+                    connection.Close();
+
+                    MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.Navigate(new MainPage());
+                }
+                else { connection.Close(); MessageBox.Show("Аккаунт не создан!", "Что-то не так...", MessageBoxButton.OK, MessageBoxImage.Error); }
+            }
+            catch (Exception)
             {
                 SessionCheckUtilities utilities = new SessionCheckUtilities();
 
-                int uid = utilities.GetUID(loginUser, passwordUser);
+                string uid = utilities.ReadUID();
 
-                utilities.WriteUID(uid);
+                Task task = new Task(() => { utilities.WriteUID(-1); });
+
+                task.Wait(100);
+                task.Start();
+
+                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+
+                connection.Open();
+
+                string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@UID", uid);
+                command.ExecuteNonQuery();
 
                 connection.Close();
-
-                MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.Navigate(new MainPage());
             }
-            else { connection.Close(); MessageBox.Show("Аккаунт не создан!", "Что-то не так...", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private bool CheckUser()

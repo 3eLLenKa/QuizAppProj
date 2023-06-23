@@ -67,7 +67,6 @@ namespace QuizAppProj.Autorization
 
                     Task task = new Task(() => {
                         int uid = utilities.GetUID(loginUser, passwordUser);
-
                         utilities.WriteUID(uid);
                     });
 
@@ -94,5 +93,3 @@ namespace QuizAppProj.Autorization
         }
     }
 }
-
-//Надо сделать задержку между процессами

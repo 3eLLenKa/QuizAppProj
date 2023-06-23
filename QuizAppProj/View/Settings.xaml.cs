@@ -34,34 +34,100 @@ namespace QuizAppProj.View
 
         private void ChangePassword(object sender, EventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Вы точно хотите изменить пароль?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
+            if (result == MessageBoxResult.Yes)
+            {
+                SessionCheckUtilities utilities = new SessionCheckUtilities();
+
+                string uid = utilities.ReadUID();
+
+                Task task = new Task(() => { utilities.WriteUID(-1); });
+
+                task.Wait(100);
+                task.Start();
+
+                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+
+                connection.Open();
+
+                string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@UID", uid);
+                command.ExecuteNonQuery();
+
+                connection.Close();
+                NavigationService.GetNavigationService(this).Navigate(new ChangePassword());
+            }
+            else return;
         }
 
         private void LeaveAccount(object sender, EventArgs e)
         {
-            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            MessageBoxResult result = MessageBox.Show("Вы точно хотите выйти?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-            string uid = utilities.ReadUID();
+            if (result == MessageBoxResult.Yes)
+            {
+                SessionCheckUtilities utilities = new SessionCheckUtilities();
 
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+                string uid = utilities.ReadUID();
 
-            connection.Open();
+                Task task = new Task(() => { utilities.WriteUID(-1); });
 
-            string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
+                task.Wait(100);
+                task.Start();
 
-            SqlCommand command = new SqlCommand(query, connection);
+                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
 
-            command.Parameters.AddWithValue("@UID", uid);
-            command.ExecuteNonQuery();
+                connection.Open();
 
-            connection.Close();
+                string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
 
-            NavigationService.GetNavigationService(this).Navigate(new LoginForm());
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@UID", uid);
+                command.ExecuteNonQuery();
+
+                connection.Close();
+
+                NavigationService.GetNavigationService(this).Navigate(new LoginForm());
+            }
+            else return;
         }
 
         private void DeleteAccount(object sender, EventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Вы точно хотите удалить аккаунт?\nОтменить это действие будет невозможно", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
+            if (result == MessageBoxResult.Yes)
+            {
+                SessionCheckUtilities utilities = new SessionCheckUtilities();
+
+                string uid = utilities.ReadUID();
+
+                Task task = new Task(() => { utilities.WriteUID(-1); });
+
+                task.Wait(100);
+                task.Start();
+
+                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+
+                connection.Open();
+
+                string query = "DELETE FROM Users WHERE id = @UID";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@UID", uid);
+                command.ExecuteNonQuery();
+
+                connection.Close();
+
+                NavigationService.GetNavigationService(this).Navigate(new LoginForm());
+            }
+            else return;
         }
     }
 }

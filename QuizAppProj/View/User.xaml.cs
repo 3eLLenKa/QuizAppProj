@@ -24,13 +24,34 @@ namespace QuizAppProj.View
     {
         public User()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            SessionCheckUtilities utilities = new SessionCheckUtilities();
+                SessionCheckUtilities utilities = new SessionCheckUtilities();
 
-            this.infoUID.Text += utilities.ReadUID();
-            this.infoDate.Text += GetDateReg();
-            this.infoLogin.Text += GetLogin();
+                this.infoUID.Text += utilities.ReadUID();
+                this.infoDate.Text += GetDateReg();
+                this.infoLogin.Text += GetLogin();
+            }
+            catch (Exception)
+            {
+                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                string uid = utilities.ReadUID();
+
+                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+
+                connection.Open();
+
+                string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@UID", uid);
+                command.ExecuteNonQuery();
+
+                connection.Close();
+            }
         }
 
         private string GetDateReg()
