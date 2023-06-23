@@ -9,6 +9,7 @@
              Style="{StaticResource Page_Style}">
     <Grid>
         <Image Source="/Images/setting_page.png" Margin="10,10,10,10"/>
+        <TextBlock TextWrapping="Wrap" Text="Настройки аккаунта" FontSize="25" Margin="23,13,359,547" Foreground="White"/>
         <Button Click="ChangeLogin" Background="Transparent" BorderBrush="Transparent" Margin="74,149,329,285">
             <Grid Height="166" Width="219">
                 <TextBlock Text="Изменить логин" Foreground="White" FontSize="20" Margin="10,10,41,123"/>

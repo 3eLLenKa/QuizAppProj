@@ -46,6 +46,7 @@ namespace QuizAppProj.Autorization
             command.ExecuteNonQuery();
             connection.Close();
 
+            MessageBox.Show($"Ваш логин успешно изменен на {newPassword}", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
             NavigationService.Navigate(new LoginForm());
         }
     }

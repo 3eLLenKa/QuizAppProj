@@ -11,6 +11,9 @@
 
     <Grid>
         <Image Source="/Images/customer_page.png" Margin="10,10,10,10"/>
+        
+        <TextBlock TextWrapping="Wrap" Text="Информация об учетной записи" FontSize="25" Margin="23,13,215,547" Foreground="White"/>
+        
         <TextBlock Text="Ваш UID:" TextWrapping="Wrap" Foreground="White" Margin="80,212,490,367"/>
         <TextBlock Text="Дата и время регистрации:  " TextWrapping="Wrap" Foreground="White" Margin="80,269,390,310"/>
         <TextBlock Text="Ваш логин:" TextWrapping="Wrap" Foreground="White" Margin="80,156,477,423" RenderTransformOrigin="0.553,-0.018"/>
