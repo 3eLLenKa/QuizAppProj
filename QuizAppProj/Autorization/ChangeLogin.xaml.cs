@@ -33,7 +33,7 @@ namespace QuizAppProj.Autorization
             var newLogin = loginTextBox.Text.Trim();
             var uid = utilities.ReadUID();
 
-            if (CheckUser())
+            if (utilities.CheckUser(newLogin))
             {
                 return;
             }
@@ -53,31 +53,6 @@ namespace QuizAppProj.Autorization
 
             MessageBox.Show($"Ваш логин успешно изменен на {newLogin}", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
             NavigationService.Navigate(new LoginForm());
-        }
-
-        private bool CheckUser()
-        {
-            var newLogin = loginTextBox.Text.Trim();
-
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
-
-            connection.Open();
-
-            string query = "SELECT COUNT(*) FROM Users WHERE login = @NewLogin";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@NewLogin", newLogin);
-
-            int count = (int)command.ExecuteScalar();
-
-            if (count > 0)
-            {
-                connection.Close();
-                MessageBox.Show($"Этот логин уже используется!", "Что-то не так...", MessageBoxButton.OK, MessageBoxImage.Error);
-                return true;
-            }
-            else { connection.Close(); return false; }
         }
     }
 }

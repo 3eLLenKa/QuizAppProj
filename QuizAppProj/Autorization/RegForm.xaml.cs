@@ -28,6 +28,8 @@ namespace QuizAppProj.Autorization
         }
         private void RegisterEventArg(object sender, EventArgs e)
         {
+            SessionCheckUtilities utilities = new SessionCheckUtilities();
+
             var loginUser = loginTextBox.Text;
             var passwordUser = passwordBox.Password;
             string regDate = DateTime.Now.ToString();
@@ -38,7 +40,7 @@ namespace QuizAppProj.Autorization
                 return;
             }
 
-            if (CheckUser())
+            if (utilities.CheckUser(loginUser))
             {
                 return;
             }
@@ -59,8 +61,6 @@ namespace QuizAppProj.Autorization
 
                 if (command.ExecuteNonQuery() == 1)
                 {
-                    SessionCheckUtilities utilities = new SessionCheckUtilities();
-
                     int uid = utilities.GetUID(loginUser, passwordUser);
                     utilities.WriteUID(uid);
 
@@ -73,8 +73,6 @@ namespace QuizAppProj.Autorization
             }
             catch (Exception)
             {
-                SessionCheckUtilities utilities = new SessionCheckUtilities();
-
                 string uid = utilities.ReadUID();
 
                 Task task = new Task(() => { utilities.WriteUID(-1); });
@@ -95,33 +93,6 @@ namespace QuizAppProj.Autorization
 
                 connection.Close();
             }
-        }
-
-        private bool CheckUser()
-        {
-            var loginUser = loginTextBox.Text;
-            var passwordUser = passwordBox.Password;
-
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
-
-            connection.Open();
-
-            string query = "SELECT COUNT(*) FROM Users WHERE login = @Login AND password = @Password";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@Login", loginUser);
-            command.Parameters.AddWithValue("@Password", passwordUser);
-
-            int count = (int)command.ExecuteScalar();
-
-            if (count > 0)
-            {
-                connection.Close();
-                MessageBox.Show($"Этот аккаунт уже существует!", "Что-то не так...", MessageBoxButton.OK, MessageBoxImage.Error);
-                return true;
-            }
-            else { connection.Close(); return false; }
         }
     }
 }

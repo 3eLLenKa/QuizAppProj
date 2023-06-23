@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using System.Windows;
 
 namespace QuizAppProj.Autorization
 {
@@ -66,6 +67,31 @@ namespace QuizAppProj.Autorization
 
             command.ExecuteNonQuery();
             connection.Close();
+        }
+
+        public bool CheckUser(string login)
+        {
+            login = login.Trim();
+
+            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+
+            connection.Open();
+
+            string query = "SELECT COUNT(*) FROM Users WHERE login = @Login";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@Login", login);
+
+            int count = (int)command.ExecuteScalar();
+
+            if (count > 0)
+            {
+                connection.Close();
+                MessageBox.Show($"Этот логин уже используется!", "Что-то не так...", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+            else { connection.Close(); return false; }
         }
     }
 }
