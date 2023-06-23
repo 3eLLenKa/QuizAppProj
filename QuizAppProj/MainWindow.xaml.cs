@@ -31,6 +31,7 @@ namespace QuizAppProj
             window = this;
 
             InitializeComponent();
+
             if (!CheckSession())
             {
                 MainFrame.Content = new LoginForm();

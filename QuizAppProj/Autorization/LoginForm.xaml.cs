@@ -65,10 +65,16 @@ namespace QuizAppProj.Autorization
                 {
                     SessionCheckUtilities utilities = new SessionCheckUtilities();
 
-                    int uid = utilities.GetUID(loginUser, passwordUser);
+                    Task task = new Task(() => {
+                        int uid = utilities.GetUID(loginUser, passwordUser);
 
-                    utilities.WriteUID(uid);
+                        utilities.WriteUID(uid);
+                    });
+
                     utilities.UpdateIsAutorized(loginUser);
+
+                    task.Wait(100);
+                    task.Start();
 
                     connection.Close();
 
