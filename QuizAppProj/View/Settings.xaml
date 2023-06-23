@@ -5,8 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuizAppProj.View"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="622">
+             d:DesignHeight="600" d:DesignWidth="622"
+             Style="{StaticResource Page_Style}">
     <Grid>
-            
+        <Image Source="/Images/setting_page.png" Margin="10,10,10,10"/>
+        <Button Click="ChangeLogin" Background="Transparent" BorderBrush="Transparent" Margin="74,149,329,285">
+            <Grid Height="166" Width="219">
+                <TextBlock Text="Изменить логин" Foreground="White" FontSize="20" Margin="10,10,41,123"/>
+            </Grid>
+        </Button>
+
+        <Button Click="ChangePassword" Background="Transparent" BorderBrush="Transparent" Margin="328,149,75,285">
+            <Grid Height="166" Width="219">
+                <TextBlock Text="Изменить пароль" Foreground="White" FontSize="20" Margin="10,10,41,123"/>
+            </Grid>
+        </Button>
+
+        <Button Click="LeaveAccount" Background="Transparent" BorderBrush="Transparent" Margin="74,354,329,80">
+            <Grid Height="166" Width="219">
+                <TextBlock Text="Выйти" Foreground="White" FontSize="20" Margin="10,10,41,123"/>
+            </Grid>
+        </Button>
+
+        <Button Click="DeleteAccount" Background="Transparent" BorderBrush="Transparent" Margin="328,354,75,80">
+            <Grid Height="166" Width="219">
+                <TextBlock Text="Удалить аккаунт" Foreground="White" FontSize="20" Margin="10,10,41,123"/>
+            </Grid>
+        </Button>
     </Grid>
 </UserControl>

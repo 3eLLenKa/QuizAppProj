@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,65 +46,47 @@ namespace QuizAppProj.Autorization
                 return;
             }
 
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
-
-            connection.Open();
-
-            string query = "SELECT COUNT(*) FROM Users WHERE login = @Login AND password = @Password";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@Login", loginUser);
-            command.Parameters.AddWithValue("@Password", passwordUser);
-
-            int count = (int)command.ExecuteScalar();
-
-            if (count > 0)
+            try
             {
-                int uid = GetUID();
+                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
 
-                File.WriteAllText(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Autorization\QuizAppUID.txt", uid.ToString());
+                connection.Open();
 
-                MessageBox.Show("Авторизация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.Navigate(new MainPage());
+                string query = "SELECT COUNT(*) FROM Users WHERE login = @Login AND password = @Password AND isAutorized = 0";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@Login", loginUser);
+                command.Parameters.AddWithValue("@Password", passwordUser);
+
+                int count = (int)command.ExecuteScalar();
+
+                if (count > 0)
+                {
+                    SessionCheckUtilities utilities = new SessionCheckUtilities();
+
+                    int uid = utilities.GetUID(loginUser, passwordUser);
+
+                    utilities.WriteUID(uid);
+                    utilities.UpdateIsAutorized(loginUser);
+
+                    connection.Close();
+
+                    MessageBox.Show("Авторизация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.Navigate(new MainPage());
+                }
+                else
+                {
+                    connection.Close();
+                    MessageBox.Show("Неверный логин или пароль.", "Что - то не так...", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Неверный логин или пароль.", "Что - то не так...", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            connection.Close();
-        }
-
-        private int GetUID()
-        {
-            var loginUser = loginTextBox.Text;
-            var passwordUser = passwordBox.Password;
-
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
-
-            connection.Open();
-
-            string query = "SELECT id FROM Users WHERE login = @Login AND password = @Password";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@Login", loginUser);
-            command.Parameters.AddWithValue("@Password", passwordUser);
-
-            int count = (int)command.ExecuteScalar();
-
-            if (count > 0)
-            {
-                int userId = Convert.ToInt32(command.ExecuteScalar());
-                connection.Close();
-                return userId;
-            }
-            else
-            {
-                connection.Close();
-                return -1;
+                MessageBox.Show($"Проверьте подключение к интернету");
             }
         }
     }
 }
+
+//Надо сделать задержку между процессами

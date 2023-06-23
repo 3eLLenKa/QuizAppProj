@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,9 +51,8 @@ namespace QuizAppProj
 
         private bool CheckSession()
         {
-            StreamReader reader = new StreamReader(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Autorization\QuizAppUID.txt");
-
-            string uid = reader.ReadLine();
+            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            string uid = utilities.ReadUID();
 
             SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
 

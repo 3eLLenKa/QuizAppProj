@@ -4,9 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuizAppProj.View"
+             xmlns:vm="clr-namespace:QuizAppProj.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="622">
+             d:DesignHeight="600" d:DesignWidth="622"
+             Style="{StaticResource Page_Style}">
+
     <Grid>
-            
+        <Image Source="/Images/customer_page.png" Margin="10,10,10,10"/>
+        <TextBlock Text="Ваш UID:" TextWrapping="Wrap" Foreground="White" Margin="80,212,490,367"/>
+        <TextBlock Text="Дата и время регистрации:  " TextWrapping="Wrap" Foreground="White" Margin="80,269,390,310"/>
+        <TextBlock Text="Ваш логин:" TextWrapping="Wrap" Foreground="White" Margin="80,156,477,423" RenderTransformOrigin="0.553,-0.018"/>
+
+        <TextBlock x:Name="infoUID" Text="{Binding UserID}" TextWrapping="Wrap" Foreground="Yellow" Margin="136,212,254,367"/>
+        <TextBlock x:Name="infoDate" Text="{Binding DateReg}" TextWrapping="Wrap" Foreground="Yellow" Margin="236,269,254,310"/>
+        <TextBlock x:Name="infoLogin" Text="{Binding Login}" TextWrapping="Wrap" Foreground="Yellow" Margin="148,156,252,423"/>
     </Grid>
 </UserControl>

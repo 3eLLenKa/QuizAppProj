@@ -57,16 +57,18 @@ namespace QuizAppProj.Autorization
 
             if (command.ExecuteNonQuery() == 1)
             {
-                int uid = GetUID();
+                SessionCheckUtilities utilities = new SessionCheckUtilities();
 
-                File.WriteAllText(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Autorization\QuizAppUID.txt", uid.ToString());
+                int uid = utilities.GetUID(loginUser, passwordUser);
+
+                utilities.WriteUID(uid);
+
+                connection.Close();
 
                 MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.Navigate(new MainPage());
             }
-            else MessageBox.Show("Аккаунт не создан!", "Что-то не так...", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            connection.Close();
+            else { connection.Close(); MessageBox.Show("Аккаунт не создан!", "Что-то не так...", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private bool CheckUser()
@@ -90,41 +92,10 @@ namespace QuizAppProj.Autorization
             if (count > 0)
             {
                 connection.Close();
-                MessageBox.Show($"{DateTime.Now}", "Что-то не так...", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Этот аккаунт уже существует!", "Что-то не так...", MessageBoxButton.OK, MessageBoxImage.Error);
                 return true;
             }
             else { connection.Close(); return false; }
-        }
-
-        private int GetUID()
-        {
-            var loginUser = loginTextBox.Text;
-            var passwordUser = passwordBox.Password;
-
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
-
-            connection.Open();
-
-            string query = "SELECT id FROM Users WHERE login = @Login AND password = @Password";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@Login", loginUser);
-            command.Parameters.AddWithValue("@Password", passwordUser);
-
-            int count = (int)command.ExecuteScalar();
-
-            if (count > 0)
-            {
-                int userId = Convert.ToInt32(command.ExecuteScalar());
-                connection.Close();
-                return userId;
-            }
-            else
-            {
-                connection.Close();
-                return -1;
-            }
         }
     }
 }
