@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="Styles/Button.xaml" />
                 <ResourceDictionary Source="Utilities/DataTemplate.xaml" />
                 <ResourceDictionary Source="Styles/RadioButton.xaml"/>
+                <ResourceDictionary Source="Styles/CheckBox.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 
