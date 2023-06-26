@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,21 +21,24 @@ namespace QuizAppProj.Quizes
     /// </summary>
     public partial class Biology : Page
     {
-        private List<CheckBox> customCheckedBoxes = new List<CheckBox>();
-
-        private List<CheckBox> easyCheckedBoxes = new List<CheckBox>();
-        private List<CheckBox> normalCheckedBoxes = new List<CheckBox>();
-        private List<CheckBox> hardCheckedBoxes = new List<CheckBox>();
-
-        private bool isPreset = false;
+        private List<CheckBox> customCheckedBoxes = new List<CheckBox>(3);
+        private List<CheckBox> checkBoxes;
         public Biology()
         {
             InitializeComponent();
-
-            if (easyCheckedBoxes.Count < 3 | normalCheckedBoxes.Count < 3 | hardCheckedBoxes.Count < 3) 
+            checkBoxes = new List<CheckBox>()
             {
-                customPresrt.IsChecked = true;
-            }
+                { easyQuestionsCheckBox },
+                { normalQuestionsCheckBox },
+                { hardQuestionsCheckBox },
+                { easyTimeCheckBox },
+                { normalTimeCheckBox },
+                { hardTimeCheckBox },
+                { easyCountCheckBox },
+                { normalCountCheckBox },
+                { hardCountCheckBox }
+            };
+            easyPresrt.IsChecked = true;
         }
         private void GoBack(object sender, RoutedEventArgs e)
         {
@@ -45,43 +49,18 @@ namespace QuizAppProj.Quizes
 
         private void easyQuestionsCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!isPreset)
-            {
-                easyCheckedBoxes.Add(easyQuestionsCheckBox);
-
-                normalCheckedBoxes.Remove(normalQuestionsCheckBox);
-                hardCheckedBoxes.Remove(hardQuestionsCheckBox);
-            }
-
             normalQuestionsCheckBox.IsChecked = false;
             hardQuestionsCheckBox.IsChecked = false;
         }
 
         private void normalQuestionsCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!isPreset)
-            {
-                normalCheckedBoxes.Add(normalQuestionsCheckBox);
-
-                easyCheckedBoxes.Remove(easyQuestionsCheckBox);
-                hardCheckedBoxes.Remove(hardQuestionsCheckBox);
-            }
-
             easyQuestionsCheckBox.IsChecked = false;
             hardQuestionsCheckBox.IsChecked = false;
         }
 
         private void hardQuestionsCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!isPreset)
-            {
-                hardCheckedBoxes.Add(hardQuestionsCheckBox);
-
-                easyCheckedBoxes.Remove(easyQuestionsCheckBox);
-                normalCheckedBoxes.Remove(normalQuestionsCheckBox);
-            }
-
-
             easyQuestionsCheckBox.IsChecked = false;
             normalQuestionsCheckBox.IsChecked = false;
         }
@@ -90,45 +69,18 @@ namespace QuizAppProj.Quizes
 
         private void easyTimeCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!isPreset)
-            {
-                easyCheckedBoxes.Add(easyTimeCheckBox);
-
-                normalCheckedBoxes.Remove(normalTimeCheckBox);
-                hardCheckedBoxes.Remove(hardTimeCheckBox);
-            }
-
-
             normalTimeCheckBox.IsChecked = false;
             hardTimeCheckBox.IsChecked = false;
         }
 
         private void normalTimeCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!isPreset)
-            {
-                normalCheckedBoxes.Add(normalTimeCheckBox);
-
-                easyCheckedBoxes.Remove(easyTimeCheckBox);
-                hardCheckedBoxes.Remove(hardTimeCheckBox);
-            }
-
-
             easyTimeCheckBox.IsChecked = false;
             hardTimeCheckBox.IsChecked = false;
         }
 
         private void hardTimeCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!isPreset)
-            {
-                hardCheckedBoxes.Add(hardTimeCheckBox);
-
-                easyCheckedBoxes.Remove(easyTimeCheckBox);
-                normalCheckedBoxes.Remove(normalTimeCheckBox);
-            }
-
-
             easyTimeCheckBox.IsChecked = false;
             normalTimeCheckBox.IsChecked = false;
         }
@@ -137,45 +89,18 @@ namespace QuizAppProj.Quizes
 
         private void easyCountCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!isPreset)
-            {
-                easyCheckedBoxes.Add(easyCountCheckBox);
-
-                normalCheckedBoxes.Remove(normalCountCheckBox);
-                hardCheckedBoxes.Remove(hardCountCheckBox);
-            }
-
-
             normalCountCheckBox.IsChecked = false;
             hardCountCheckBox.IsChecked = false;
         }
 
         private void normalCountCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!isPreset)
-            {
-                normalCheckedBoxes.Add(normalCountCheckBox);
-
-                hardCheckedBoxes.Remove(hardCountCheckBox);
-                easyCheckedBoxes.Add(hardCountCheckBox);
-            }
-
-
             easyCountCheckBox.IsChecked = false;
             hardCountCheckBox.IsChecked = false;
         }
 
         private void hardCountCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!isPreset)
-            {
-                hardCheckedBoxes.Add(hardCountCheckBox);
-
-                easyCheckedBoxes.Remove(easyCountCheckBox);
-                hardCheckedBoxes.Remove(hardCountCheckBox);
-            }
-
-
             easyCountCheckBox.IsChecked = false;
             normalCountCheckBox.IsChecked = false;
         }
@@ -184,7 +109,7 @@ namespace QuizAppProj.Quizes
 
         private void easyPresrt_Checked(object sender, RoutedEventArgs e)
         {
-            isPreset = true;
+            saveSettings.Visibility = Visibility.Hidden;
 
             easyQuestionsCheckBox.IsChecked = true;
             easyTimeCheckBox.IsChecked = true;
@@ -193,7 +118,7 @@ namespace QuizAppProj.Quizes
 
         private void normalPresrt_Checked(object sender, RoutedEventArgs e)
         {
-            isPreset = true;
+            saveSettings.Visibility = Visibility.Hidden;
 
             normalQuestionsCheckBox.IsChecked = true;
             normalTimeCheckBox.IsChecked = true;
@@ -202,7 +127,7 @@ namespace QuizAppProj.Quizes
 
         private void hardPresrt_Checked(object sender, RoutedEventArgs e)
         {
-            isPreset = true;
+            saveSettings.Visibility = Visibility.Hidden;
 
             hardQuestionsCheckBox.IsChecked = true;
             hardTimeCheckBox.IsChecked = true;
@@ -211,21 +136,39 @@ namespace QuizAppProj.Quizes
 
         private void customPresrt_Checked(object sender, RoutedEventArgs e)
         {
-            //customCheckedBoxes.AddRange(easyCheckedBoxes);
-            //customCheckedBoxes.AddRange(normalCheckedBoxes);
-            //easyCheckedBoxes.AddRange(hardCheckedBoxes);
+            saveSettings.Visibility = Visibility.Visible;
 
-            //if (!isPreset & (easyCheckedBoxes.Count < 3 | normalCheckedBoxes.Count < 3 | hardCheckedBoxes.Count < 3))
-            //{
-            //    for (int i = 0; i < customCheckedBoxes.Count; i++)
-            //    {
-            //        customCheckedBoxes[i].IsChecked = true;
-            //    }
-            //}
-            //else
-            //{
-            //    customCheckedBoxes.ForEach(x => x.IsChecked = false);
-            //}
+            for (int i = 0; i < customCheckedBoxes.Count; i++)
+            {
+                customCheckedBoxes[i].IsChecked = true;
+            }
+        }
+
+        private void saveSettingsClick(object sender, RoutedEventArgs e)
+        {
+            int count = 0;
+
+            for (int i = 0; i < checkBoxes.Count; i++)
+            {
+                if (checkBoxes[i].IsChecked == true)
+                {
+                    customCheckedBoxes.Add(checkBoxes[i]);
+                    count++;
+                }
+            }
+
+            if (count == 3)
+            {
+                StreamWriter writer = new StreamWriter(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Quizes\BiologySettings.txt");
+
+                for (int i = 0; i < customCheckedBoxes.Count; i++)
+                {
+                    writer.WriteLine(customCheckedBoxes[i].Name);
+                }
+                writer.Close();
+                MessageBox.Show("Ваши настройки сохранены!\nВы можете их перезаписать, заново нажав на кнопку", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else { MessageBox.Show("Вы выбрали не все настройки!"); customCheckedBoxes.Clear(); }
         }
     }
 }

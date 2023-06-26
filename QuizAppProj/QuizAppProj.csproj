@@ -264,6 +264,12 @@
   <ItemGroup>
     <Resource Include="Autorization\QuizAppUID.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Quizes\BiologySettings.txt" />
+    <Resource Include="Quizes\GeographySettings.txt" />
+    <Resource Include="Quizes\HistorySettings.txt" />
+    <Resource Include="Quizes\MizedSettings.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
