@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Threading;
 using System.Windows.Shapes;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace QuizAppProj.Quizes
 {
@@ -138,14 +141,33 @@ namespace QuizAppProj.Quizes
         {
             saveSettings.Visibility = Visibility.Visible;
 
-            for (int i = 0; i < customCheckedBoxes.Count; i++)
+            List<string> list = new List<string>(3);
+
+            StreamReader reader = new StreamReader(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Quizes\BiologySettings.txt");
+            
+            for (int i = 0; i < 3; i++)
             {
-                customCheckedBoxes[i].IsChecked = true;
+                list.Add(reader.ReadLine());
+            }
+
+            reader.Close();
+
+            foreach (CheckBox item in checkBoxes)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (item.Name == list[i])
+                    {
+                        item.IsChecked = true;
+                    }
+                }
             }
         }
 
         private void saveSettingsClick(object sender, RoutedEventArgs e)
         {
+            
+
             int count = 0;
 
             for (int i = 0; i < checkBoxes.Count; i++)
@@ -156,17 +178,20 @@ namespace QuizAppProj.Quizes
                     count++;
                 }
             }
-
+            //File.WriteAllText(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Quizes\BiologySettings.txt", string.Empty);
             if (count == 3)
             {
                 StreamWriter writer = new StreamWriter(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Quizes\BiologySettings.txt");
-
                 for (int i = 0; i < customCheckedBoxes.Count; i++)
                 {
                     writer.WriteLine(customCheckedBoxes[i].Name);
                 }
                 writer.Close();
-                MessageBox.Show("Ваши настройки сохранены!\nВы можете их перезаписать, заново нажав на кнопку", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                MessageBox.Show("Ваши настройки сохранены!\nВы можете их перезаписать, заново нажав на кнопку.\n\nПриложение перезапустится.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Shutdown();
             }
             else { MessageBox.Show("Вы выбрали не все настройки!"); customCheckedBoxes.Clear(); }
         }
