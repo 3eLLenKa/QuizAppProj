@@ -178,7 +178,7 @@ namespace QuizAppProj.Quizes
                     count++;
                 }
             }
-            //File.WriteAllText(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Quizes\BiologySettings.txt", string.Empty);
+            
             if (count == 3)
             {
                 StreamWriter writer = new StreamWriter(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Quizes\BiologySettings.txt");
