@@ -1,23 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace QuizAppProj.Autorization
 {
@@ -48,7 +34,8 @@ namespace QuizAppProj.Autorization
 
             try
             {
-                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
                 connection.Open();
 
@@ -63,8 +50,6 @@ namespace QuizAppProj.Autorization
 
                 if (count > 0)
                 {
-                    SessionCheckUtilities utilities = new SessionCheckUtilities();
-
                     Task task = new Task(() => {
                         int uid = utilities.GetUID(loginUser, passwordUser);
                         utilities.WriteUID(uid);
@@ -72,7 +57,7 @@ namespace QuizAppProj.Autorization
 
                     utilities.UpdateIsAutorized(loginUser);
 
-                    task.Wait(100);
+                    task.Wait(500);
                     task.Start();
 
                     connection.Close();
@@ -88,7 +73,7 @@ namespace QuizAppProj.Autorization
             }
             catch (Exception)
             {
-                MessageBox.Show($"Проверьте подключение к интернету");
+                MessageBox.Show($"Проверьте подключение к интернету", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

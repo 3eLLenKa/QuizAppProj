@@ -38,7 +38,7 @@ namespace QuizAppProj.Autorization
                 return;
             }
 
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
             connection.Open();
 
             string query = "UPDATE Users SET login = @NewLogin WHERE id = @UID";

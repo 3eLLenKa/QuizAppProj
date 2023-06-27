@@ -12,9 +12,10 @@ namespace QuizAppProj.Autorization
 {
     internal class SessionCheckUtilities
     {
+        public readonly string ConnectionString = @"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True";
         public int GetUID(object userLogin, object userPassword) 
         {
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(ConnectionString);
 
             connection.Open();
 
@@ -55,7 +56,7 @@ namespace QuizAppProj.Autorization
 
         public void UpdateIsAutorized(string userLogin)
         {
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(ConnectionString);
 
             connection.Open();
 
@@ -73,7 +74,7 @@ namespace QuizAppProj.Autorization
         {
             login = login.Trim();
 
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(ConnectionString);
 
             connection.Open();
 

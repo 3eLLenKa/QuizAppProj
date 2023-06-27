@@ -1,3 +1,0 @@
-easyQuestionsCheckBox
-hardTimeCheckBox
-normalCountCheckBox

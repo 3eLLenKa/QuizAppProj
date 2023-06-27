@@ -42,7 +42,7 @@ namespace QuizAppProj.View
                 task.Wait(100);
                 task.Start();
 
-                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
                 connection.Open();
 
@@ -74,7 +74,7 @@ namespace QuizAppProj.View
                 task.Wait(100);
                 task.Start();
 
-                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
                 connection.Open();
 
@@ -106,7 +106,7 @@ namespace QuizAppProj.View
                 task.Wait(100);
                 task.Start();
 
-                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
                 connection.Open();
 
@@ -139,7 +139,7 @@ namespace QuizAppProj.View
                 task.Wait(100);
                 task.Start();
 
-                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
                 connection.Open();
 

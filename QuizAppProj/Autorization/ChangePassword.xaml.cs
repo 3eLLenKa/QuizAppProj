@@ -33,7 +33,7 @@ namespace QuizAppProj.Autorization
             var newPassword = passwordTextBox.Text.Trim();
             var uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
             connection.Open();
 
             string query = "UPDATE Users SET password = @NewPass WHERE id = @UID";

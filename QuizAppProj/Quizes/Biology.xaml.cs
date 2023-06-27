@@ -16,6 +16,8 @@ using System.Windows.Navigation;
 using System.Threading;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices.ComTypes;
+using System.Data.SqlClient;
+using QuizAppProj.Autorization;
 
 namespace QuizAppProj.Quizes
 {
@@ -143,14 +145,26 @@ namespace QuizAppProj.Quizes
 
             List<string> list = new List<string>(3);
 
-            StreamReader reader = new StreamReader(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Quizes\BiologySettings.txt");
-            
-            for (int i = 0; i < 3; i++)
-            {
-                list.Add(reader.ReadLine());
-            }
+            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            string uid = utilities.ReadUID();
 
+            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+
+            connection.Open();
+
+            string query = $"SELECT biology_questions_setting, biology_time_setting, biology_count_setting FROM Users WHERE id = {uid}";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            reader.Read();
+
+            list.Add(reader[0].ToString());
+            list.Add(reader[1].ToString());
+            list.Add(reader[2].ToString());      
+           
             reader.Close();
+            connection.Close();
 
             foreach (CheckBox item in checkBoxes)
             {
@@ -166,8 +180,6 @@ namespace QuizAppProj.Quizes
 
         private void saveSettingsClick(object sender, RoutedEventArgs e)
         {
-            
-
             int count = 0;
 
             for (int i = 0; i < checkBoxes.Count; i++)
@@ -178,22 +190,32 @@ namespace QuizAppProj.Quizes
                     count++;
                 }
             }
-            
+
             if (count == 3)
             {
-                StreamWriter writer = new StreamWriter(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Quizes\BiologySettings.txt");
-                for (int i = 0; i < customCheckedBoxes.Count; i++)
-                {
-                    writer.WriteLine(customCheckedBoxes[i].Name);
-                }
-                writer.Close();
+                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                string uid = utilities.ReadUID();
 
-                MessageBox.Show("Ваши настройки сохранены!\nВы можете их перезаписать, заново нажав на кнопку.\n\nПриложение перезапустится.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+                connection.Open();
 
-                Process.Start(Application.ResourceAssembly.Location);
-                Application.Current.Shutdown();
+                string query = "UPDATE Users SET biology_questions_setting = @Questions, biology_time_setting = @Time, biology_count_setting = @Count WHERE id = @UID";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@UID", uid);
+                command.Parameters.AddWithValue("@Questions", customCheckedBoxes[0].Name);
+                command.Parameters.AddWithValue("@Time", customCheckedBoxes[1].Name);
+                command.Parameters.AddWithValue("@Count", customCheckedBoxes[2].Name);
+
+                command.ExecuteNonQuery();
+                connection.Close();
+
+                MessageBox.Show("Ваши настройки сохранены!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                
+                customCheckedBoxes.Clear();
             }
-            else { MessageBox.Show("Вы выбрали не все настройки!"); customCheckedBoxes.Clear(); }
+            else { MessageBox.Show("Вы выбрали не все настройки!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); customCheckedBoxes.Clear(); }
         }
     }
 }
