@@ -26,11 +26,14 @@ namespace QuizAppProj.Quizes
     /// </summary>
     public partial class Biology : Page
     {
-        private List<CheckBox> customCheckedBoxes = new List<CheckBox>(3);
         private List<CheckBox> checkBoxes;
+        private List<CheckBox> customCheckedBoxes = new List<CheckBox>(3);
+
+        protected List<string> settings = new List<string>(3);
         public Biology()
         {
             InitializeComponent();
+
             checkBoxes = new List<CheckBox>()
             {
                 { easyQuestionsCheckBox },
@@ -54,18 +57,33 @@ namespace QuizAppProj.Quizes
 
         private void easyQuestionsCheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            settings.Add("easyQuestionsCheckBox");
+
+            settings.Remove("normalQuestionsCheckBox");
+            settings.Remove("hardQuestionsCheckBox");
+
             normalQuestionsCheckBox.IsChecked = false;
             hardQuestionsCheckBox.IsChecked = false;
         }
 
         private void normalQuestionsCheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            settings.Add("normalQuestionsCheckBox");
+
+            settings.Remove("easyQuestionsCheckBox");
+            settings.Remove("hardQuestionsCheckBox");
+
             easyQuestionsCheckBox.IsChecked = false;
             hardQuestionsCheckBox.IsChecked = false;
         }
 
         private void hardQuestionsCheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            settings.Add("hardQuestionsCheckBox");
+
+            settings.Remove("normalQuestionsCheckBox");
+            settings.Remove("easyQuestionsCheckBox");
+
             easyQuestionsCheckBox.IsChecked = false;
             normalQuestionsCheckBox.IsChecked = false;
         }
@@ -74,18 +92,33 @@ namespace QuizAppProj.Quizes
 
         private void easyTimeCheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            settings.Add("easyTimeCheckBox");
+
+            settings.Remove("normalTimeCheckBox");
+            settings.Remove("hardTimeCheckBox");
+
             normalTimeCheckBox.IsChecked = false;
             hardTimeCheckBox.IsChecked = false;
         }
 
         private void normalTimeCheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            settings.Add("normalTimeCheckBox");
+
+            settings.Remove("easyTimeCheckBox");
+            settings.Remove("hardTimeCheckBox");
+
             easyTimeCheckBox.IsChecked = false;
             hardTimeCheckBox.IsChecked = false;
         }
 
         private void hardTimeCheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            settings.Add("hardTimeCheckBox");
+
+            settings.Remove("easyTimeCheckBox");
+            settings.Remove("normalTimeCheckBox");
+
             easyTimeCheckBox.IsChecked = false;
             normalTimeCheckBox.IsChecked = false;
         }
@@ -94,18 +127,33 @@ namespace QuizAppProj.Quizes
 
         private void easyCountCheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            settings.Add("easyCountCheckBox");
+
+            settings.Remove("normalCountCheckBox");
+            settings.Remove("hardCountCheckBox");
+
             normalCountCheckBox.IsChecked = false;
             hardCountCheckBox.IsChecked = false;
         }
 
         private void normalCountCheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            settings.Add("normalCountCheckBox");
+
+            settings.Remove("easyCountCheckBox");
+            settings.Remove("hardCountCheckBox");
+
             easyCountCheckBox.IsChecked = false;
             hardCountCheckBox.IsChecked = false;
         }
 
         private void hardCountCheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            settings.Add("hardCountCheckBox");
+
+            settings.Remove("normalCountCheckBox");
+            settings.Remove("easyCountCheckBox");
+
             easyCountCheckBox.IsChecked = false;
             normalCountCheckBox.IsChecked = false;
         }
@@ -116,6 +164,12 @@ namespace QuizAppProj.Quizes
         {
             saveSettings.Visibility = Visibility.Hidden;
 
+            settings.Clear();
+
+            settings.Add("easyQuestionsCheckBox");
+            settings.Add("easyTimeCheckBox");
+            settings.Add("easyCountCheckBox");
+
             easyQuestionsCheckBox.IsChecked = true;
             easyTimeCheckBox.IsChecked = true;
             easyCountCheckBox.IsChecked = true;
@@ -124,6 +178,12 @@ namespace QuizAppProj.Quizes
         private void normalPresrt_Checked(object sender, RoutedEventArgs e)
         {
             saveSettings.Visibility = Visibility.Hidden;
+
+            settings.Clear();
+
+            settings.Add("normalQuestionsCheckBox");
+            settings.Add("normalTimeCheckBox");
+            settings.Add("normalCountCheckBox");
 
             normalQuestionsCheckBox.IsChecked = true;
             normalTimeCheckBox.IsChecked = true;
@@ -134,6 +194,12 @@ namespace QuizAppProj.Quizes
         {
             saveSettings.Visibility = Visibility.Hidden;
 
+            settings.Clear();
+
+            settings.Add("hardQuestionsCheckBox");
+            settings.Add("hardTimeCheckBox");
+            settings.Add("hardCountCheckBox");
+
             hardQuestionsCheckBox.IsChecked = true;
             hardTimeCheckBox.IsChecked = true;
             hardCountCheckBox.IsChecked = true;
@@ -143,7 +209,7 @@ namespace QuizAppProj.Quizes
         {
             saveSettings.Visibility = Visibility.Visible;
 
-            List<string> list = new List<string>(3);
+            settings.Clear();
 
             SessionCheckUtilities utilities = new SessionCheckUtilities();
             string uid = utilities.ReadUID();
@@ -159,18 +225,18 @@ namespace QuizAppProj.Quizes
 
             reader.Read();
 
-            list.Add(reader[0].ToString());
-            list.Add(reader[1].ToString());
-            list.Add(reader[2].ToString());      
+            settings.Add(reader[0].ToString());
+            settings.Add(reader[1].ToString());
+            settings.Add(reader[2].ToString());      
            
             reader.Close();
             connection.Close();
 
             foreach (CheckBox item in checkBoxes)
             {
-                for (int i = 0; i < list.Count; i++)
+                for (int i = 0; i < settings.Count; i++)
                 {
-                    if (item.Name == list[i])
+                    if (item.Name == settings[i])
                     {
                         item.IsChecked = true;
                     }

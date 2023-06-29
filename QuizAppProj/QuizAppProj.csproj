@@ -86,14 +86,30 @@
     <Compile Include="Quizes\Biology.xaml.cs">
       <DependentUpon>Biology.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Quizes\BiologyQuiz.xaml.cs">
+      <DependentUpon>BiologyQuiz.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Quizes\BiologySettings.cs" />
     <Compile Include="Quizes\Geography.xaml.cs">
       <DependentUpon>Geography.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Quizes\GeographyQuiz.xaml.cs">
+      <DependentUpon>GeographyQuiz.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Quizes\GeographySettings.cs" />
     <Compile Include="Quizes\History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Quizes\HistoryQuiz.xaml.cs">
+      <DependentUpon>HistoryQuiz.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Quizes\HistorySettings.cs" />
     <Compile Include="Quizes\Mixed.xaml.cs">
       <DependentUpon>Mixed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Quizes\MixedSettings.cs" />
+    <Compile Include="Quizes\MizedQuiz.xaml.cs">
+      <DependentUpon>MizedQuiz.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ViewModelBase.cs" />
@@ -153,7 +169,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Quizes\BiologyQuiz.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Quizes\Geography.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Quizes\GeographyQuiz.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,7 +185,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Quizes\HistoryQuiz.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Quizes\Mixed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Quizes\MizedQuiz.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
