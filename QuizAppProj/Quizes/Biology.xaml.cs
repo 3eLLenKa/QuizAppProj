@@ -53,6 +53,11 @@ namespace QuizAppProj.Quizes
             NavigationService.GoBack();
         }
 
+        private void BiologyQuizNavigation(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new BiologyQuiz());
+        }
+
         //Настройки сложности вопросов
 
         private void easyQuestionsCheckBox_Checked(object sender, RoutedEventArgs e)

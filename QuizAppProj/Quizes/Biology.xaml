@@ -50,7 +50,7 @@
                     <!-- Продолжить/Назад -->
 
         <Button Click="GoBack" Content="Назад" Foreground="White" Background="#272B2F" Grid.Row="5" Margin="30,45,645,10"/>
-        <Button Content="Далее" Foreground="White" Background="#272B2F" Grid.Row="5" Margin="645,46,30,10"/>
+        <Button Click="BiologyQuizNavigation" Content="Далее" Foreground="White" Background="#272B2F" Grid.Row="5" Margin="645,46,30,10"/>
         <Button x:Name="saveSettings" Click="saveSettingsClick" Content="Сохранить настройки" Foreground="#FF0BCDFF" Visibility="Hidden" Background="#272B2F" Grid.Row="5" Margin="337,45,338,10"/>
 
         <Grid.RowDefinitions>

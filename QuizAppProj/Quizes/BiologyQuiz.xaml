@@ -5,10 +5,40 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuizAppProj.Quizes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      Height="600"
+      Width="850"
       Title="BiologyQuiz">
 
     <Grid>
-        
+        <Border Background="#212529" CornerRadius="20" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
+
+        <TextBlock x:Name="timeTextBox" Text="Квиз на тему: Биология" FontSize="25" Foreground="#FF0BCDFF" Margin="20,10,132,20"/>
+
+        <TextBlock Text="Осталось времени: " Grid.Column="1" Foreground="#FF0BCDFF" Margin="20,10,222,33"/>
+        <TextBlock Text="Прогресс: " Grid.Column="1" Foreground="#FF0BCDFF" Margin="20,35,341,8"/>
+
+        <ProgressBar Grid.Column="1" Margin="84,38,102,10" RenderTransformOrigin="0.402,0.5"/>
+
+        <TextBlock x:Name="questionNumberTextBox" Grid.Row="1" Visibility="Visible" FontSize="20" Foreground="#FF0BCDFF" Margin="20,10,24,109" />
+        <TextBlock x:Name="questionTextBox" Grid.Row="1" Visibility="Visible" FontSize="15" Foreground="#FF0BCDFF" TextWrapping="Wrap" Margin="20,48,20,20" Grid.ColumnSpan="2" />
+
+        <RadioButton x:Name="firstAnswer" Grid.Row="2" Margin="29,23,29,23" />
+        <RadioButton x:Name="secondAnswer" Grid.Row="2" Margin="29,23,29,23" Grid.Column="1" />
+        <RadioButton x:Name="thirdAnswer" Grid.Row="3" Margin="29,23,29,23" />
+        <RadioButton x:Name="fourthAnswer" Grid.Row="3" Margin="29,23,29,23" Grid.Column="1" />
+
+        <Button x:Name="answerButton" Click="AnswerButtonClick" Grid.Row="4" Content="Ответить" Background="#FF0BCDFF" Margin="360,30,360,30" Grid.ColumnSpan="2"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="63*"/>
+            <RowDefinition Height="153*"/>
+            <RowDefinition Height="142*"/>
+            <RowDefinition Height="142*"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
     </Grid>
 </Page>
