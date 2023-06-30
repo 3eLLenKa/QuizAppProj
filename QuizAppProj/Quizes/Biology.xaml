@@ -39,7 +39,7 @@
         <CheckBox x:Name="normalTimeCheckBox" Content="Средне" Foreground="White" Grid.Row="3" Style="{StaticResource CheckBoxStyle}" Margin="338,52,338,3" Checked="normalTimeCheckBox_Checked"/>
         <CheckBox x:Name="hardTimeCheckBox" Content="Мало" Foreground="White" Grid.Row="3" Style="{StaticResource CheckBoxStyle}" Margin="645,53,30,3" Checked="hardTimeCheckBox_Checked"/>
         
-                    <!-- Кол-во вопросов -->
+        <!-- Кол-во вопросов -->
 
         <TextBlock Grid.Row="4" TextWrapping="Wrap" TextAlignment="Left" Text="Кол-во вопросов:" FontSize="20" Margin="20,13,31,58" Foreground="White"/>
 

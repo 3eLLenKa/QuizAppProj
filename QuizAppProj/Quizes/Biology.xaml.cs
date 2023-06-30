@@ -29,7 +29,9 @@ namespace QuizAppProj.Quizes
         private List<CheckBox> checkBoxes;
         private List<CheckBox> customCheckedBoxes = new List<CheckBox>(3);
 
-        protected HashSet<string> settings = new HashSet<string>();
+        protected static HashSet<string> settings = new HashSet<string>();
+
+        private bool isCustom = false;
         public Biology()
         {
             InitializeComponent();
@@ -46,7 +48,6 @@ namespace QuizAppProj.Quizes
                 { normalCountCheckBox },
                 { hardCountCheckBox }
             };
-            easyPresrt.IsChecked = true;
         }
         private void GoBack(object sender, RoutedEventArgs e)
         {
@@ -55,7 +56,8 @@ namespace QuizAppProj.Quizes
 
         private void BiologyQuizNavigation(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new BiologyQuiz());
+            if (settings.Count < 3) { MessageBox.Show("Вы выбрали не все настройки!"); return; }
+            else NavigationService.Navigate(new BiologyQuiz());
         }
 
         //Настройки сложности вопросов
@@ -185,6 +187,7 @@ namespace QuizAppProj.Quizes
 
         private void customPresrt_Checked(object sender, RoutedEventArgs e)
         {
+
             saveSettings.Visibility = Visibility.Visible;
 
             settings.Clear();
@@ -205,21 +208,19 @@ namespace QuizAppProj.Quizes
 
             settings.Add(reader[0].ToString());
             settings.Add(reader[1].ToString());
-            settings.Add(reader[2].ToString());      
-           
+            settings.Add(reader[2].ToString());
+
             reader.Close();
             connection.Close();
 
             foreach (CheckBox item in checkBoxes)
             {
-                for (int i = 0; i < settings.Count; i++)
+                if (settings.Contains(item.Name))
                 {
-                    if (item.Name == settings.ElementAt(i))
-                    {
-                        item.IsChecked = true;
-                    }
+                    item.IsChecked = true;
                 }
             }
+            
         }
 
         private void saveSettingsClick(object sender, RoutedEventArgs e)
