@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,15 +22,18 @@ namespace QuizAppProj.Quizes
     /// <summary>
     /// Логика взаимодействия для BiologyQuiz.xaml
     /// </summary>
+
     public partial class BiologyQuiz : Page
     {
-        private static BiologySettings settings = new BiologySettings();
+        private BiologySettings settings = new BiologySettings();
 
         private List<RadioButton> radioButtons;
 
+        public int points { set; get; }
+
         private int temp;
-        private int maxCount = settings.MaxCount;
-        private int points = 0;
+        private int maxCount;
+
         private int numberQuestion = 1;
         private int textNumberQuestion = 0;
 
@@ -40,6 +44,8 @@ namespace QuizAppProj.Quizes
             InitializeComponent();
 
             radioButtons = new List<RadioButton>() {{ firstAnswer }, {secondAnswer}, { thirdAnswer }, { fourthAnswer }};
+            maxCount = settings.MaxCount;
+            points = 0;
 
             InitializeQuiz();
         }
@@ -48,6 +54,8 @@ namespace QuizAppProj.Quizes
         {
             progressBar.Minimum = 0;
             progressBar.Maximum = settings.MaxCount;
+
+            pointsTextBox.Text = $"Кол-во баллов: {points}";
 
             questionNumberTextBox.Text = $"Вопрос #{numberQuestion}";
             questionTextBox.Text = settings.gameQuestions.ElementAt(textNumberQuestion).Value;
@@ -114,7 +122,7 @@ namespace QuizAppProj.Quizes
                 continueButton.Visibility = Visibility.Hidden;
                 answerButton.Visibility = Visibility.Hidden;
 
-                MessageBox.Show("Вы прошли викторину!", "Ура!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"Вы прошли викторину!\n\nКол-во баллов: {points}\nРезультат сохранён.", "Ура!", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.Navigate(new MainPage());
             }
         }
@@ -129,6 +137,7 @@ namespace QuizAppProj.Quizes
             answerButton.Visibility = Visibility.Visible;
             continueButton.Visibility = Visibility.Hidden;
 
+            pointsTextBox.Text = $"Кол-во баллов: {points}";
             questionNumberTextBox.Text = $"Вопрос #{numberQuestion}";
             questionTextBox.Text = settings.gameQuestions.ElementAt(textNumberQuestion).Value;
 

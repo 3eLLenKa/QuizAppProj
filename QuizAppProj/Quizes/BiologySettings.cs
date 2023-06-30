@@ -1,9 +1,12 @@
-﻿using System;
+﻿using QuizAppProj.Autorization;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Data.SqlClient;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
@@ -175,6 +178,22 @@ namespace QuizAppProj.Quizes
                         break;
                 }
             }
+        }
+
+        private void SaveResult()
+        {
+            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            string uid = utilities.ReadUID();
+
+            SqlConnection connection = new SqlConnection();
+            connection.Open();
+
+            string query = "UPDATE Users SET biology_result = biology_result + @Result WHERE id = @UID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@Result", IQuizResult.Points);
+            command.Parameters.AddWithValue("@UID", uid);
         }
     }
 }
