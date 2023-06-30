@@ -21,10 +21,12 @@ namespace QuizAppProj.Quizes
     /// </summary>
     public partial class BiologyQuiz : Page
     {
-        private BiologySettings settings = new BiologySettings();
+        private static BiologySettings settings = new BiologySettings();
 
         private List<RadioButton> radioButtons;
 
+        private int temp;
+        private int maxCount = settings.MaxCount;
         private int points = 0;
         private int numberQuestion = 1;
         private int textNumberQuestion = 0;
@@ -50,28 +52,38 @@ namespace QuizAppProj.Quizes
 
         private void AnswerButtonClick(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < radioButtons.Count; i++)
+            if (maxCount != 0)
             {
-                if (radioButtons[i].IsChecked == true & (string)radioButtons[i].Content == settings.easyAnswers.ElementAt(textNumberQuestion))
+                for (int i = 0; i < radioButtons.Count; i++)
                 {
-                    radioButtons[i].Background = Brushes.LimeGreen;
+                    if (radioButtons[i].IsChecked == true & radioButtons[i].Content.ToString() == settings.gameQuestions.ElementAt(textNumberQuestion).Key)
+                    {
+                        maxCount--;
+                        radioButtons[i].Background = Brushes.LimeGreen;
 
-                    points += settings.maxPoints;
-                    textNumberQuestion++;
-                    numberQuestion++;
+                        points += settings.MaxPoints;
+                        temp += 4;
+                        textNumberQuestion++;
+                        numberQuestion++;
 
-                    Thread.Sleep(500);
+                        Thread.Sleep(500);
 
-                    break;
+                        break;
+                    }
+                }
+
+                questionNumberTextBox.Text = $"Вопрос #{numberQuestion}";
+                questionTextBox.Text = settings.gameQuestions.ElementAt(textNumberQuestion).Value;
+
+                for (int i = 0; i < radioButtons.Count; i++)
+                {
+                    radioButtons[i].Content = settings.gameAnswers.ElementAt(i + temp);
                 }
             }
-
-            questionNumberTextBox.Text = $"Вопрос #{numberQuestion}";
-            questionTextBox.Text = settings.gameQuestions.ElementAt(textNumberQuestion).Value;
-
-            for (int i = 0; i < radioButtons.Count; i++)
+            else 
             {
-                radioButtons[i].Content = settings.easyAnswers.ElementAt(i + 4);
+                MessageBox.Show("Вы прошли викторину!", "Ура!", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.Navigate(new MainPage());
             }
         }
     }

@@ -29,7 +29,7 @@ namespace QuizAppProj.Quizes
         private List<CheckBox> checkBoxes;
         private List<CheckBox> customCheckedBoxes = new List<CheckBox>(3);
 
-        protected List<string> settings = new List<string>(3);
+        protected HashSet<string> settings = new HashSet<string>();
         public Biology()
         {
             InitializeComponent();
@@ -64,9 +64,6 @@ namespace QuizAppProj.Quizes
         {
             settings.Add("easyQuestionsCheckBox");
 
-            settings.Remove("normalQuestionsCheckBox");
-            settings.Remove("hardQuestionsCheckBox");
-
             normalQuestionsCheckBox.IsChecked = false;
             hardQuestionsCheckBox.IsChecked = false;
         }
@@ -75,9 +72,6 @@ namespace QuizAppProj.Quizes
         {
             settings.Add("normalQuestionsCheckBox");
 
-            settings.Remove("easyQuestionsCheckBox");
-            settings.Remove("hardQuestionsCheckBox");
-
             easyQuestionsCheckBox.IsChecked = false;
             hardQuestionsCheckBox.IsChecked = false;
         }
@@ -85,9 +79,6 @@ namespace QuizAppProj.Quizes
         private void hardQuestionsCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             settings.Add("hardQuestionsCheckBox");
-
-            settings.Remove("normalQuestionsCheckBox");
-            settings.Remove("easyQuestionsCheckBox");
 
             easyQuestionsCheckBox.IsChecked = false;
             normalQuestionsCheckBox.IsChecked = false;
@@ -99,9 +90,6 @@ namespace QuizAppProj.Quizes
         {
             settings.Add("easyTimeCheckBox");
 
-            settings.Remove("normalTimeCheckBox");
-            settings.Remove("hardTimeCheckBox");
-
             normalTimeCheckBox.IsChecked = false;
             hardTimeCheckBox.IsChecked = false;
         }
@@ -110,9 +98,6 @@ namespace QuizAppProj.Quizes
         {
             settings.Add("normalTimeCheckBox");
 
-            settings.Remove("easyTimeCheckBox");
-            settings.Remove("hardTimeCheckBox");
-
             easyTimeCheckBox.IsChecked = false;
             hardTimeCheckBox.IsChecked = false;
         }
@@ -120,9 +105,6 @@ namespace QuizAppProj.Quizes
         private void hardTimeCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             settings.Add("hardTimeCheckBox");
-
-            settings.Remove("easyTimeCheckBox");
-            settings.Remove("normalTimeCheckBox");
 
             easyTimeCheckBox.IsChecked = false;
             normalTimeCheckBox.IsChecked = false;
@@ -134,9 +116,6 @@ namespace QuizAppProj.Quizes
         {
             settings.Add("easyCountCheckBox");
 
-            settings.Remove("normalCountCheckBox");
-            settings.Remove("hardCountCheckBox");
-
             normalCountCheckBox.IsChecked = false;
             hardCountCheckBox.IsChecked = false;
         }
@@ -145,9 +124,6 @@ namespace QuizAppProj.Quizes
         {
             settings.Add("normalCountCheckBox");
 
-            settings.Remove("easyCountCheckBox");
-            settings.Remove("hardCountCheckBox");
-
             easyCountCheckBox.IsChecked = false;
             hardCountCheckBox.IsChecked = false;
         }
@@ -155,9 +131,6 @@ namespace QuizAppProj.Quizes
         private void hardCountCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             settings.Add("hardCountCheckBox");
-
-            settings.Remove("normalCountCheckBox");
-            settings.Remove("easyCountCheckBox");
 
             easyCountCheckBox.IsChecked = false;
             normalCountCheckBox.IsChecked = false;
@@ -241,7 +214,7 @@ namespace QuizAppProj.Quizes
             {
                 for (int i = 0; i < settings.Count; i++)
                 {
-                    if (item.Name == settings[i])
+                    if (item.Name == settings.ElementAt(i))
                     {
                         item.IsChecked = true;
                     }
