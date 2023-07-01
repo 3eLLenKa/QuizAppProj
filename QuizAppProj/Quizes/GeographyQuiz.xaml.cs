@@ -94,7 +94,7 @@ namespace QuizAppProj.Quizes
 
                     foreach (var item in radioButtons)
                     {
-                        if (settings.gameAnswers.Contains(item.Content))
+                        if (settings.gameQuestions.ContainsKey(item.Content.ToString()))
                         {
                             item.Foreground = Brushes.LimeGreen;
                             break;
@@ -198,7 +198,7 @@ namespace QuizAppProj.Quizes
             SqlConnection connection = new SqlConnection(utilities.ConnectionString);
             connection.Open();
 
-            string query = "UPDATE Users SET biology_result = biology_result + @Result WHERE id = @UID";
+            string query = "UPDATE Users SET geography_result = geography_result + @Result WHERE id = @UID";
 
             SqlCommand command = new SqlCommand(query, connection);
 

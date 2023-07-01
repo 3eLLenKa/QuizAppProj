@@ -98,7 +98,7 @@ namespace QuizAppProj.Quizes
 
                     foreach (var item in radioButtons)
                     {
-                        if (settings.gameAnswers.Contains(item.Content))
+                        if (settings.gameQuestions.ContainsKey(item.Content.ToString()))
                         {
                             item.Foreground = Brushes.LimeGreen;
                             break;
