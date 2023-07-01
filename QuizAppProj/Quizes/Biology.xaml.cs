@@ -30,8 +30,6 @@ namespace QuizAppProj.Quizes
         private List<CheckBox> customCheckedBoxes = new List<CheckBox>(3);
 
         protected static HashSet<string> settings = new HashSet<string>();
-
-        private bool isCustom = false;
         public Biology()
         {
             InitializeComponent();

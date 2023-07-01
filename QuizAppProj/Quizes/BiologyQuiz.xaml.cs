@@ -1,5 +1,7 @@
-﻿using System;
+﻿using QuizAppProj.Autorization;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -29,16 +31,16 @@ namespace QuizAppProj.Quizes
 
         private List<RadioButton> radioButtons;
 
-        public int points { set; get; }
+        private DispatcherTimer timer;
 
-        private int temp;
+        private int secondsElapsed;
+        private int points;
+        private int answersOffset;
         private int maxCount;
 
         private int numberQuestion = 1;
         private int textNumberQuestion = 0;
 
-        private DispatcherTimer timer;
-        private int secondsElapsed;
         public BiologyQuiz()
         {
             InitializeComponent();
@@ -76,10 +78,11 @@ namespace QuizAppProj.Quizes
                 {
                     timer.Stop();
 
+                    points += settings.MaxPoints;
+                    pointsTextBox.Text = $"Кол-во баллов: {points}";
+
                     radioButtons[i].Background = Brushes.LimeGreen;
                     radioButtons[i].Foreground = Brushes.Lime;
-
-                    points += settings.MaxPoints;
 
                     answerButton.Visibility = Visibility.Hidden;
                     continueButton.Visibility = Visibility.Visible;
@@ -122,6 +125,8 @@ namespace QuizAppProj.Quizes
                 continueButton.Visibility = Visibility.Hidden;
                 answerButton.Visibility = Visibility.Hidden;
 
+                SaveResult();
+
                 MessageBox.Show($"Вы прошли викторину!\n\nКол-во баллов: {points}\nРезультат сохранён.", "Ура!", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.Navigate(new MainPage());
             }
@@ -131,13 +136,12 @@ namespace QuizAppProj.Quizes
         {
             textNumberQuestion++;
             numberQuestion++;
-            temp += 4;
+            answersOffset += 4;
             maxCount--;
 
             answerButton.Visibility = Visibility.Visible;
             continueButton.Visibility = Visibility.Hidden;
 
-            pointsTextBox.Text = $"Кол-во баллов: {points}";
             questionNumberTextBox.Text = $"Вопрос #{numberQuestion}";
             questionTextBox.Text = settings.gameQuestions.ElementAt(textNumberQuestion).Value;
 
@@ -146,7 +150,7 @@ namespace QuizAppProj.Quizes
                 radioButtons[i].IsChecked = false;
                 radioButtons[i].Background = Brushes.White;
                 radioButtons[i].Foreground = Brushes.White;
-                radioButtons[i].Content = settings.gameAnswers.ElementAt(i + temp);
+                radioButtons[i].Content = settings.gameAnswers.ElementAt(i + answersOffset);
             }
 
             progressBar.Value++;
@@ -188,6 +192,26 @@ namespace QuizAppProj.Quizes
         private void UpdateTimeText()
         {
             timeTextBox.Text = $"Осталось времени: {secondsElapsed} сек.";
+        }
+
+        private void SaveResult()
+        {
+            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            string uid = utilities.ReadUID();
+
+            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            connection.Open();
+
+            string query = "UPDATE Users SET biology_result = biology_result + @Result WHERE id = @UID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@Result", points);
+            command.Parameters.AddWithValue("@UID", uid);
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
         }
     }
 }

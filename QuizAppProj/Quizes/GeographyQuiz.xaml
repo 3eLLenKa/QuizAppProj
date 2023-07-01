@@ -5,10 +5,42 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuizAppProj.Quizes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      Height="600"
+      Width="850"
       Title="GeographyQuiz">
 
     <Grid>
-        
+        <Border Background="#212529" CornerRadius="20" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
+
+        <TextBlock Text="Квиз на тему: География" FontSize="25" Foreground="#FF0BCDFF" Margin="20,10,117,20"/>
+
+        <TextBlock x:Name="timeTextBox" Text="Осталось времени: " Grid.Column="1" Foreground="#FF0BCDFF" Margin="20,10,102,33"/>
+        <TextBlock Text="Прогресс: " Grid.Column="1" Foreground="#FF0BCDFF" Margin="20,35,341,8"/>
+
+        <ProgressBar x:Name="progressBar" Grid.Column="1" Foreground="#FF0BCDFF" Margin="84,38,102,10" RenderTransformOrigin="0.402,0.5"/>
+
+        <TextBlock x:Name="questionNumberTextBox" Grid.Row="1" Visibility="Visible" FontSize="20" Foreground="#FF0BCDFF" Margin="20,5,24,114" />
+        <TextBlock x:Name="pointsTextBox" Grid.Row="1" Visibility="Visible" FontSize="20" Foreground="#FF0BCDFF" Margin="22,5,22,114" Grid.Column="1" />
+        <TextBlock x:Name="questionTextBox" Grid.Row="1" Visibility="Visible" FontSize="15" Foreground="#FF0BCDFF" TextWrapping="Wrap" Margin="20,48,20,20" Grid.ColumnSpan="2" />
+
+        <RadioButton x:Name="firstAnswer" FontSize="20" Foreground="White" Grid.Row="2" Margin="29,23,29,23" />
+        <RadioButton x:Name="secondAnswer" FontSize="20" Foreground="White" Grid.Row="2" Margin="29,23,29,23" Grid.Column="1" />
+        <RadioButton x:Name="thirdAnswer" FontSize="20" Foreground="White" Grid.Row="3" Margin="29,23,29,23" />
+        <RadioButton x:Name="fourthAnswer" FontSize="20" Foreground="White" Grid.Row="3" Margin="29,23,29,23" Grid.Column="1" />
+
+        <Button x:Name="answerButton" Visibility="Visible" Click="AnswerButtonClick" Grid.Row="4" Content="Ответить" Background="#FF0BCDFF" Margin="360,30,360,30" Grid.ColumnSpan="2"/>
+        <Button x:Name="continueButton" Visibility="Hidden" Click="ContinueButtonClick" Grid.Row="4" Content="Дальше" Background="#FF0BCDFF" Margin="360,30,360,30" Grid.ColumnSpan="2"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="63*"/>
+            <RowDefinition Height="153*"/>
+            <RowDefinition Height="142*"/>
+            <RowDefinition Height="142*"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
     </Grid>
 </Page>

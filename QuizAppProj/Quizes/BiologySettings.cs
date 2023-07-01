@@ -179,21 +179,5 @@ namespace QuizAppProj.Quizes
                 }
             }
         }
-
-        private void SaveResult()
-        {
-            SessionCheckUtilities utilities = new SessionCheckUtilities();
-            string uid = utilities.ReadUID();
-
-            SqlConnection connection = new SqlConnection();
-            connection.Open();
-
-            string query = "UPDATE Users SET biology_result = biology_result + @Result WHERE id = @UID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@Result", IQuizResult.Points);
-            command.Parameters.AddWithValue("@UID", uid);
-        }
     }
 }
