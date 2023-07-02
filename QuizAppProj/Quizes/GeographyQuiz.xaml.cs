@@ -60,7 +60,7 @@ namespace QuizAppProj.Quizes
 
             for (int i = 0; i < radioButtons.Count; i++)
             {
-                radioButtons[i].Content = settings.gameAnswers.ElementAt(i);
+                (radioButtons[i].Content as TextBlock).Text = settings.gameAnswers.ElementAt(i);
             }
 
             StartTimer();
@@ -70,7 +70,7 @@ namespace QuizAppProj.Quizes
         {
             for (int i = 0; i < radioButtons.Count; i++)
             {
-                if (radioButtons[i].IsChecked == true & radioButtons[i].Content.ToString() == settings.gameQuestions.ElementAt(textNumberQuestion).Key)
+                if (radioButtons[i].IsChecked == true & (radioButtons[i].Content as TextBlock).Text == settings.gameQuestions.ElementAt(textNumberQuestion).Key)
                 {
                     timer.Stop();
 
@@ -78,7 +78,7 @@ namespace QuizAppProj.Quizes
                     pointsTextBox.Text = $"Кол-во баллов: {points}";
 
                     radioButtons[i].Background = Brushes.LimeGreen;
-                    radioButtons[i].Foreground = Brushes.Lime;
+                    (radioButtons[i].Content as TextBlock).Foreground = Brushes.Lime;
 
                     answerButton.Visibility = Visibility.Hidden;
                     continueButton.Visibility = Visibility.Visible;
@@ -88,21 +88,23 @@ namespace QuizAppProj.Quizes
                     break;
                 }
 
-                if (radioButtons[i].IsChecked == true & radioButtons[i].Content.ToString() != settings.gameQuestions.ElementAt(textNumberQuestion).Key)
+                if (radioButtons[i].IsChecked == true & (radioButtons[i].Content as TextBlock).Text != settings.gameQuestions.ElementAt(textNumberQuestion).Key)
                 {
                     timer.Stop();
 
                     foreach (var item in radioButtons)
                     {
-                        if (settings.gameQuestions.ContainsKey(item.Content.ToString()))
+                        if (settings.gameQuestions.ContainsKey((item.Content as TextBlock).Text))
                         {
-                            item.Foreground = Brushes.LimeGreen;
+                            (item.Content as TextBlock).Foreground = Brushes.LimeGreen;
                             break;
                         }
                     }
 
+                    if (points != 0) { points -= (settings.MaxPoints); pointsTextBox.Text = $"Кол-во баллов: {points}"; }
+
                     radioButtons[i].Background = Brushes.Red;
-                    radioButtons[i].Foreground = Brushes.Red;
+                    (radioButtons[i].Content as TextBlock).Foreground = Brushes.Red;
 
                     answerButton.Visibility = Visibility.Hidden;
                     continueButton.Visibility = Visibility.Visible;
@@ -145,8 +147,8 @@ namespace QuizAppProj.Quizes
             {
                 radioButtons[i].IsChecked = false;
                 radioButtons[i].Background = Brushes.White;
-                radioButtons[i].Foreground = Brushes.White;
-                radioButtons[i].Content = settings.gameAnswers.ElementAt(i + answersOffset);
+                (radioButtons[i].Content as TextBlock).Foreground = Brushes.White;
+                (radioButtons[i].Content as TextBlock).Text = settings.gameAnswers.ElementAt(i + answersOffset);
             }
 
             progressBar.Value++;
@@ -198,7 +200,7 @@ namespace QuizAppProj.Quizes
             SqlConnection connection = new SqlConnection(utilities.ConnectionString);
             connection.Open();
 
-            string query = "UPDATE Users SET geography_result = geography_result + @Result WHERE id = @UID";
+            string query = "UPDATE Users SET geography_result = geography_result + @Result, sum_result = mixed_result + biology_result + geography_result + history_result WHERE id = @UID";
 
             SqlCommand command = new SqlCommand(query, connection);
 

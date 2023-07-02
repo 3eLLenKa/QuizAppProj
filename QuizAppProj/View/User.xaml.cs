@@ -186,5 +186,27 @@ namespace QuizAppProj.View
 
             return result;
         }
+
+        private string GetSumPoints()
+        {
+            DataBaseUtilities utilities = new DataBaseUtilities();
+            string uid = utilities.ReadUID();
+
+            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+
+            connection.Open();
+
+            string query = "SELECT sum_result FROM Users WHERE id = @UID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@UID", uid);
+
+            string result = command.ExecuteScalar().ToString();
+
+            connection.Close();
+
+            return result;
+        }
     }
 }

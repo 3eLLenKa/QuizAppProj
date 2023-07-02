@@ -23,10 +23,18 @@
         <TextBlock x:Name="pointsTextBox" Grid.Row="1" Visibility="Visible" FontSize="20" Foreground="#FF0BCDFF" Margin="22,5,22,114" Grid.Column="1" />
         <TextBlock x:Name="questionTextBox" Grid.Row="1" Visibility="Visible" FontSize="15" Foreground="#FF0BCDFF" TextWrapping="Wrap" Margin="20,48,20,20" Grid.ColumnSpan="2" />
 
-        <RadioButton x:Name="firstAnswer" FontSize="20" Foreground="White" Grid.Row="2" Margin="29,23,29,23" />
-        <RadioButton x:Name="secondAnswer" FontSize="20" Foreground="White" Grid.Row="2" Margin="29,23,29,23" Grid.Column="1" />
-        <RadioButton x:Name="thirdAnswer" FontSize="20" Foreground="White" Grid.Row="3" Margin="29,23,29,23" />
-        <RadioButton x:Name="fourthAnswer" FontSize="20" Foreground="White" Grid.Row="3" Margin="29,23,29,23" Grid.Column="1" />
+        <RadioButton x:Name="firstAnswer" Foreground="White" Grid.Row="2" Margin="29,23,29,23">
+            <TextBlock FontSize="20" TextWrapping="Wrap" Width="347" Height="86"/>
+        </RadioButton>
+        <RadioButton x:Name="secondAnswer" FontSize="20" Foreground="White" Grid.Row="2" Margin="29,23,29,23" Grid.Column="1" >
+            <TextBlock FontSize="20" TextWrapping="Wrap" Width="347" Height="86"/>
+        </RadioButton>
+        <RadioButton x:Name="thirdAnswer" FontSize="20" Foreground="White" Grid.Row="3" Margin="29,23,29,23" >
+            <TextBlock FontSize="20" TextWrapping="Wrap" Width="347" Height="86"/>
+        </RadioButton>
+        <RadioButton x:Name="fourthAnswer" FontSize="20" Foreground="White" Grid.Row="3" Margin="29,23,29,23" Grid.Column="1" >
+            <TextBlock FontSize="20" TextWrapping="Wrap" Width="347" Height="86"/>
+        </RadioButton>
 
         <Button x:Name="answerButton" Visibility="Visible" Click="AnswerButtonClick" Grid.Row="4" Content="Ответить" Background="#FF0BCDFF" Margin="360,30,360,30" Grid.ColumnSpan="2"/>
         <Button x:Name="continueButton" Visibility="Hidden" Click="ContinueButtonClick" Grid.Row="4" Content="Дальше" Background="#FF0BCDFF" Margin="360,30,360,30" Grid.ColumnSpan="2"/>
