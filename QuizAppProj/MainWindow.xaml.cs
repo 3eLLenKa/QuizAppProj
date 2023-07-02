@@ -28,6 +28,10 @@ namespace QuizAppProj
         public static MainWindow window;
         public MainWindow()
         {
+            FileInfo info = new FileInfo(@"D:\session.txt");
+
+            if (!info.Exists) { File.WriteAllText(@"D:\session.txt", "0"); }
+
             try
             {
                 window = this;

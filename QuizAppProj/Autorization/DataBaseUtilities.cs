@@ -43,12 +43,12 @@ namespace QuizAppProj.Autorization
 
         public void WriteUID(int uid)
         {
-            File.WriteAllText(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Autorization\QuizAppUID.txt", uid.ToString());
+            File.WriteAllText(@"D:\session.txt", uid.ToString());
         }
 
         public string ReadUID()
         {
-            StreamReader reader = new StreamReader(@"C:\Users\alexk\source\repos\QuizAppProj\QuizAppProj\Autorization\QuizAppUID.txt");
+            StreamReader reader = new StreamReader(@"D:\session.txt");
 
             string uid = reader.ReadLine();
             return uid;
