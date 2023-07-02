@@ -107,10 +107,10 @@
     <Compile Include="Quizes\Mixed.xaml.cs">
       <DependentUpon>Mixed.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Quizes\MixedSettings.cs" />
-    <Compile Include="Quizes\MizedQuiz.xaml.cs">
-      <DependentUpon>MizedQuiz.xaml</DependentUpon>
+    <Compile Include="Quizes\MixedQuiz.xaml.cs">
+      <DependentUpon>MixedQuiz.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Quizes\MixedSettings.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ViewModelBase.cs" />
     <Compile Include="ViewModel\CreateQuizVM.cs" />
@@ -193,7 +193,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Quizes\MizedQuiz.xaml">
+    <Page Include="Quizes\MixedQuiz.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

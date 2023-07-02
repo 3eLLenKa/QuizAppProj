@@ -10,12 +10,56 @@
       Title="Mixed">
 
     <Grid>
-        <Border Background="#212529" CornerRadius="20" />
-        <Grid HorizontalAlignment="Left" Width="228">
-            <Border Background="#272B2F" CornerRadius="20,0,0,20" />
-            <StackPanel Height="400" Width="228">
-                <Button Height="43" Click="GoBack" Background="#212529" Content="Назад" FontSize="20" Foreground="White"/>
-            </StackPanel>
-        </Grid>
+        <Border Background="#212529" CornerRadius="20" Grid.RowSpan="6" />
+
+        <TextBlock Grid.Row="0" TextWrapping="Wrap" TextAlignment="Center" Text="Настройки викторины" FontSize="25" Margin="31,13,31,10" Foreground="White"/>
+
+        <!-- Пресеты -->
+
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" TextAlignment="Left" Text="Пресеты:" FontSize="20" Margin="20,13,31,58" Foreground="White"/>
+
+        <RadioButton x:Name="easyPresrt" Content="Легко" Foreground="White" Grid.Row="1" Style="{StaticResource RadioButtonStyle}" Margin="30,52,645,3" Checked="easyPresrt_Checked"/>
+        <RadioButton x:Name="normalPresrt" Content="Средне" Foreground="White" Grid.Row="1" Style="{StaticResource RadioButtonStyle}" Margin="235,52,440,3" Checked="normalPresrt_Checked"/>
+        <RadioButton x:Name="hardPresrt" Content="Сложно" Foreground="White" Grid.Row="1" Style="{StaticResource RadioButtonStyle}" Margin="440,53,235,3" Checked="hardPresrt_Checked"/>
+        <RadioButton x:Name="customPresrt" Content="Пользовательские" Foreground="White" Grid.Row="1" Style="{StaticResource RadioButtonStyle}" Margin="645,52,30,3" Checked="customPresrt_Checked"/>
+
+        <!-- Уровень сложности вопросов-->
+
+        <TextBlock Grid.Row="2" TextWrapping="Wrap" TextAlignment="Left" Text="Уровень сложности вопросов:" FontSize="20" Margin="20,13,31,58" Foreground="White"/>
+
+        <CheckBox x:Name="easyQuestionsCheckBox" Content="Легко" Foreground="White" Grid.Row="2" Style="{StaticResource CheckBoxStyle}" Margin="30,52,645,3" Checked="easyQuestionsCheckBox_Checked"/>
+        <CheckBox x:Name="normalQuestionsCheckBox" Content="Средне" Foreground="White" Grid.Row="2" Style="{StaticResource CheckBoxStyle}" Margin="338,52,338,3" Checked="normalQuestionsCheckBox_Checked"/>
+        <CheckBox x:Name="hardQuestionsCheckBox" Content="Сложно" Foreground="White" Grid.Row="2" Style="{StaticResource CheckBoxStyle}" Margin="645,53,30,3" Checked="hardQuestionsCheckBox_Checked"/>
+
+        <!-- Время на ответ -->
+
+        <TextBlock Grid.Row="3" TextWrapping="Wrap" TextAlignment="Left" Text="Кол-во времени на ответ:" FontSize="20" Margin="20,13,31,58" Foreground="White"/>
+
+        <CheckBox x:Name="easyTimeCheckBox" Content="Много" Foreground="White" Grid.Row="3" Style="{StaticResource CheckBoxStyle}" Margin="30,52,645,3" Checked="easyTimeCheckBox_Checked"/>
+        <CheckBox x:Name="normalTimeCheckBox" Content="Средне" Foreground="White" Grid.Row="3" Style="{StaticResource CheckBoxStyle}" Margin="338,52,338,3" Checked="normalTimeCheckBox_Checked"/>
+        <CheckBox x:Name="hardTimeCheckBox" Content="Мало" Foreground="White" Grid.Row="3" Style="{StaticResource CheckBoxStyle}" Margin="645,53,30,3" Checked="hardTimeCheckBox_Checked"/>
+
+        <!-- Кол-во вопросов -->
+
+        <TextBlock Grid.Row="4" TextWrapping="Wrap" TextAlignment="Left" Text="Кол-во вопросов:" FontSize="20" Margin="20,13,31,58" Foreground="White"/>
+
+        <CheckBox x:Name="easyCountCheckBox" Content="Мало" Foreground="White" Grid.Row="4" Style="{StaticResource CheckBoxStyle}" Margin="30,52,645,3" Checked="easyCountCheckBox_Checked"/>
+        <CheckBox x:Name="normalCountCheckBox" Content="Средне" Foreground="White" Grid.Row="4" Style="{StaticResource CheckBoxStyle}" Margin="338,52,338,3" Checked="normalCountCheckBox_Checked"/>
+        <CheckBox x:Name="hardCountCheckBox" Content="Много" Foreground="White" Grid.Row="4" Style="{StaticResource CheckBoxStyle}" Margin="645,53,30,3" Checked="hardCountCheckBox_Checked"/>
+
+        <!-- Продолжить/Назад -->
+
+        <Button Click="GoBack" Content="Назад" Foreground="White" Background="#272B2F" Grid.Row="5" Margin="30,45,645,10"/>
+        <Button Click="BiologyQuizNavigation" Content="Далее" Foreground="White" Background="#272B2F" Grid.Row="5" Margin="645,46,30,10"/>
+        <Button x:Name="saveSettings" Click="saveSettingsClick" Content="Сохранить настройки" Foreground="#FF0BCDFF" Visibility="Hidden" Background="#272B2F" Grid.Row="5" Margin="337,45,338,10"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="110*"/>
+            <RowDefinition Height="110*"/>
+            <RowDefinition Height="110*"/>
+            <RowDefinition Height="110*"/>
+            <RowDefinition Height="110*"/>
+        </Grid.RowDefinitions>
     </Grid>
 </Page>
