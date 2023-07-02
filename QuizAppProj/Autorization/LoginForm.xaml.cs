@@ -34,7 +34,7 @@ namespace QuizAppProj.Autorization
 
             try
             {
-                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                DataBaseUtilities utilities = new DataBaseUtilities();
                 SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
                 connection.Open();

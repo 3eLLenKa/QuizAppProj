@@ -196,7 +196,7 @@ namespace QuizAppProj.Quizes
 
         private void SaveResult()
         {
-            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
             SqlConnection connection = new SqlConnection(utilities.ConnectionString);

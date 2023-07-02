@@ -28,7 +28,7 @@ namespace QuizAppProj.Autorization
 
         private void ChangeEventArg(object sender, EventArgs e)
         {
-            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            DataBaseUtilities utilities = new DataBaseUtilities();
 
             var newLogin = loginTextBox.Text.Trim();
             var uid = utilities.ReadUID();

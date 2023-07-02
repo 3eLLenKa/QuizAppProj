@@ -33,7 +33,7 @@ namespace QuizAppProj.View
 
             if (result == MessageBoxResult.Yes)
             {
-                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                DataBaseUtilities utilities = new DataBaseUtilities();
 
                 string uid = utilities.ReadUID();
 
@@ -65,7 +65,7 @@ namespace QuizAppProj.View
 
             if (result == MessageBoxResult.Yes)
             {
-                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                DataBaseUtilities utilities = new DataBaseUtilities();
 
                 string uid = utilities.ReadUID();
 
@@ -97,7 +97,7 @@ namespace QuizAppProj.View
 
             if (result == MessageBoxResult.Yes)
             {
-                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                DataBaseUtilities utilities = new DataBaseUtilities();
 
                 string uid = utilities.ReadUID();
 
@@ -130,7 +130,7 @@ namespace QuizAppProj.View
 
             if (result == MessageBoxResult.Yes)
             {
-                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                DataBaseUtilities utilities = new DataBaseUtilities();
 
                 string uid = utilities.ReadUID();
 

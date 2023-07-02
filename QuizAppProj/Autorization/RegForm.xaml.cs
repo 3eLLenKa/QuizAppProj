@@ -28,7 +28,7 @@ namespace QuizAppProj.Autorization
         }
         private void RegisterEventArg(object sender, EventArgs e)
         {
-            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            DataBaseUtilities utilities = new DataBaseUtilities();
 
             var loginUser = loginTextBox.Text;
             var passwordUser = passwordBox.Password;

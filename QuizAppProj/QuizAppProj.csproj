@@ -81,7 +81,7 @@
     <Compile Include="Autorization\RegForm.xaml.cs">
       <DependentUpon>RegForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Autorization\SessionCheckUtilities.cs" />
+    <Compile Include="Autorization\DataBaseUtilities.cs" />
     <Compile Include="Model\PageModel.cs" />
     <Compile Include="Quizes\Biology.xaml.cs">
       <DependentUpon>Biology.xaml</DependentUpon>

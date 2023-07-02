@@ -186,7 +186,7 @@ namespace QuizAppProj.Quizes
 
             settings.Clear();
 
-            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
             SqlConnection connection = new SqlConnection(utilities.ConnectionString);
@@ -231,7 +231,7 @@ namespace QuizAppProj.Quizes
 
             if (count == 3)
             {
-                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                DataBaseUtilities utilities = new DataBaseUtilities();
                 string uid = utilities.ReadUID();
 
                 SqlConnection connection = new SqlConnection(utilities.ConnectionString);

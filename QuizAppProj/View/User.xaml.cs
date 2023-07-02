@@ -28,7 +28,7 @@ namespace QuizAppProj.View
             {
                 InitializeComponent();
 
-                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                DataBaseUtilities utilities = new DataBaseUtilities();
 
                 this.infoUID.Text += utilities.ReadUID();
                 this.infoDate.Text += GetDateReg();
@@ -36,7 +36,7 @@ namespace QuizAppProj.View
             }
             catch (Exception)
             {
-                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                DataBaseUtilities utilities = new DataBaseUtilities();
                 string uid = utilities.ReadUID();
 
                 SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
@@ -56,7 +56,7 @@ namespace QuizAppProj.View
 
         private string GetDateReg()
         {
-            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
             SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
@@ -78,7 +78,7 @@ namespace QuizAppProj.View
 
         private string GetLogin()
         {
-            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
             SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");

@@ -28,7 +28,7 @@ namespace QuizAppProj.Autorization
 
         private void ChangeEventArg(object sender, RoutedEventArgs e)
         {
-            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            DataBaseUtilities utilities = new DataBaseUtilities();
 
             var newPassword = passwordTextBox.Text.Trim();
             var uid = utilities.ReadUID();

@@ -42,7 +42,7 @@ namespace QuizAppProj
             }
             catch (Exception)
             {
-                SessionCheckUtilities utilities = new SessionCheckUtilities();
+                DataBaseUtilities utilities = new DataBaseUtilities();
                 string uid = utilities.ReadUID();
 
                 SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
@@ -73,7 +73,7 @@ namespace QuizAppProj
 
         private bool CheckSession()
         {
-            SessionCheckUtilities utilities = new SessionCheckUtilities();
+            DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
             SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");

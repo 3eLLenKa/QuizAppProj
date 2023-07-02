@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace QuizAppProj.Autorization
 {
-    internal class SessionCheckUtilities
+    internal class DataBaseUtilities
     {
         public readonly string ConnectionString = @"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True";
         public int GetUID(object userLogin, object userPassword) 
