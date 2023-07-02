@@ -9,17 +9,32 @@
              d:DesignHeight="600" d:DesignWidth="622"
              Style="{StaticResource Page_Style}">
 
+    <UserControl.DataContext>
+        <vm:UserVM/>
+    </UserControl.DataContext>
+
     <Grid>
         <Image Source="/Images/customer_page.png" Margin="10,10,10,10"/>
-        
-        <TextBlock TextWrapping="Wrap" Text="Информация об учетной записи" FontSize="25" Margin="23,13,215,547" Foreground="White"/>
-        
-        <TextBlock Text="Ваш UID:" TextWrapping="Wrap" Foreground="White" Margin="80,212,490,367"/>
-        <TextBlock Text="Дата и время регистрации:  " TextWrapping="Wrap" Foreground="White" Margin="80,269,390,310"/>
-        <TextBlock Text="Ваш логин:" TextWrapping="Wrap" Foreground="White" Margin="80,156,477,423" RenderTransformOrigin="0.553,-0.018"/>
 
-        <TextBlock x:Name="infoUID" Text="{Binding UserID}" TextWrapping="Wrap" Foreground="Yellow" Margin="136,212,254,367"/>
+        <TextBlock TextWrapping="Wrap" Text="Информация об учетной записи" FontSize="25" Margin="23,13,215,547" Foreground="White"/>
+
+        <TextBlock Text="Ваш UID:" TextWrapping="Wrap" Foreground="White" FontSize="15" Margin="80,211,480,368"/>
+        <TextBlock Text="Дата и время регистрации:  " TextWrapping="Wrap" Foreground="White" Margin="80,269,390,310"/>
+        <TextBlock Text="Ваш логин:" TextWrapping="Wrap" Foreground="White" FontSize="15" Margin="80,154,464,425" RenderTransformOrigin="0.553,-0.018"/>
+
+        <TextBlock x:Name="infoUID" Text="{Binding UserID}" FontSize="15" TextWrapping="Wrap" Foreground="Yellow" Margin="147,211,265,368"/>
         <TextBlock x:Name="infoDate" Text="{Binding DateReg}" TextWrapping="Wrap" Foreground="Yellow" Margin="236,269,254,310"/>
-        <TextBlock x:Name="infoLogin" Text="{Binding Login}" TextWrapping="Wrap" Foreground="Yellow" Margin="148,156,252,423"/>
+        <TextBlock x:Name="infoLogin" Text="{Binding Login}" FontSize="15" TextWrapping="Wrap" Foreground="Yellow" Margin="163,154,271,425"/>
+
+        <TextBlock Text="Результаты викторин:" TextWrapping="Wrap" Foreground="White" FontSize="22" Margin="97,329,230,232" RenderTransformOrigin="0.553,-0.018"/>
+        <TextBlock Text="История:" TextWrapping="Wrap" Foreground="White" FontSize="18" Margin="97,374,450,201"/>
+        <TextBlock Text="География:" TextWrapping="Wrap" Foreground="White" FontSize="18" Margin="97,406,432,168"/>
+        <TextBlock Text="Биология:" TextWrapping="Wrap" Foreground="White" FontSize="18" Margin="97,437,442,142"/>
+        <TextBlock Text="Смешанная:" TextWrapping="Wrap" Foreground="White" FontSize="18" Margin="97,466,425,108"/>
+
+        <TextBlock x:Name="historyResult" Text="{Binding UserID}" FontSize="15" TextWrapping="Wrap" Foreground="Yellow" Margin="182,377,365,202"/>
+        <TextBlock x:Name="geographyResult" Text="{Binding DateReg}" FontSize="15" TextWrapping="Wrap" Foreground="Yellow" Margin="195,409,295,169"/>
+        <TextBlock x:Name="biologyResult" Text="{Binding Login}" FontSize="15" TextWrapping="Wrap" Foreground="Yellow" Margin="185,440,249,139"/>
+        <TextBlock x:Name="mixedResult" Text="{Binding Login}" FontSize="15" TextWrapping="Wrap" Foreground="Yellow" Margin="202,469,232,109"/>
     </Grid>
 </UserControl>

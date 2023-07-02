@@ -10,6 +10,8 @@ namespace QuizAppProj.ViewModel
 {
     internal class UserVM
     {
-        
+        public string UserID { get; set; }
+        public string DateReg { get; set; }
+        public string Login { get; set; }
     }
 }

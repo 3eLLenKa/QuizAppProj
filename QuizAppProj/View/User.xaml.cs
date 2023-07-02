@@ -33,6 +33,11 @@ namespace QuizAppProj.View
                 this.infoUID.Text += utilities.ReadUID();
                 this.infoDate.Text += GetDateReg();
                 this.infoLogin.Text += GetLogin();
+
+                this.historyResult.Text += GetHistoryPoints();
+                this.geographyResult.Text += GetGeographyPoints();
+                this.biologyResult.Text += GetBiologyPoints();
+                this.mixedResult.Text += GetMixedPoints();
             }
             catch (Exception)
             {
@@ -59,7 +64,7 @@ namespace QuizAppProj.View
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
             connection.Open();
 
@@ -75,13 +80,12 @@ namespace QuizAppProj.View
 
             return date;
         }
-
         private string GetLogin()
         {
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
             connection.Open();
 
@@ -96,6 +100,91 @@ namespace QuizAppProj.View
             connection.Close();
 
             return login;
+        }
+
+        private string GetBiologyPoints()
+        {
+            DataBaseUtilities utilities = new DataBaseUtilities();
+            string uid = utilities.ReadUID();
+
+            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+
+            connection.Open();
+
+            string query = "SELECT biology_result FROM Users WHERE id = @UID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@UID", uid);
+
+            string result = command.ExecuteScalar().ToString();
+
+            connection.Close();
+
+            return result;
+        }
+        private string GetHistoryPoints()
+        {
+            DataBaseUtilities utilities = new DataBaseUtilities();
+            string uid = utilities.ReadUID();
+
+            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+
+            connection.Open();
+
+            string query = "SELECT history_result FROM Users WHERE id = @UID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@UID", uid);
+
+            string result = command.ExecuteScalar().ToString();
+
+            connection.Close();
+
+            return result;
+        }
+        private string GetGeographyPoints()
+        {
+            DataBaseUtilities utilities = new DataBaseUtilities();
+            string uid = utilities.ReadUID();
+
+            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+
+            connection.Open();
+
+            string query = "SELECT geography_result FROM Users WHERE id = @UID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@UID", uid);
+
+            string result = command.ExecuteScalar().ToString();
+
+            connection.Close();
+
+            return result;
+        }
+        private string GetMixedPoints()
+        {
+            DataBaseUtilities utilities = new DataBaseUtilities();
+            string uid = utilities.ReadUID();
+
+            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+
+            connection.Open();
+
+            string query = "SELECT mixed_result FROM Users WHERE id = @UID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@UID", uid);
+
+            string result = command.ExecuteScalar().ToString();
+
+            connection.Close();
+
+            return result;
         }
     }
 }
