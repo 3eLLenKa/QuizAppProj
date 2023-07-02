@@ -37,10 +37,7 @@ namespace QuizAppProj.View
 
                 string uid = utilities.ReadUID();
 
-                Task task = new Task(() => { utilities.WriteUID(-1); });
-
-                task.Wait(100);
-                task.Start();
+                utilities.WriteUID(-1);
 
                 SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
@@ -69,10 +66,7 @@ namespace QuizAppProj.View
 
                 string uid = utilities.ReadUID();
 
-                Task task = new Task(() => { utilities.WriteUID(-1); });
-
-                task.Wait(100);
-                task.Start();
+                utilities.WriteUID(-1);
 
                 SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
@@ -101,10 +95,7 @@ namespace QuizAppProj.View
 
                 string uid = utilities.ReadUID();
 
-                Task task = new Task(() => { utilities.WriteUID(-1); });
-
-                task.Wait(100);
-                task.Start();
+                utilities.WriteUID(-1);
 
                 SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
@@ -134,10 +125,7 @@ namespace QuizAppProj.View
 
                 string uid = utilities.ReadUID();
 
-                Task task = new Task(() => { utilities.WriteUID(-1); });
-
-                task.Wait(100);
-                task.Start();
+                utilities.WriteUID(-1);
 
                 SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 

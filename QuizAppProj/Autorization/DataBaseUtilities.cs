@@ -42,8 +42,12 @@ namespace QuizAppProj.Autorization
         }
 
         public void WriteUID(int uid)
-        {
-            File.WriteAllText(@"D:\session.txt", uid.ToString());
+        { 
+            using (StreamWriter writer = new StreamWriter(@"D:\session.txt"))
+            {
+                writer.WriteLine(uid);
+                writer.Close();
+            }
         }
 
         public string ReadUID()
@@ -51,6 +55,7 @@ namespace QuizAppProj.Autorization
             StreamReader reader = new StreamReader(@"D:\session.txt");
 
             string uid = reader.ReadLine();
+            reader.Close();
             return uid;
         }
 

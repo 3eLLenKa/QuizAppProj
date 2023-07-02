@@ -50,15 +50,10 @@ namespace QuizAppProj.Autorization
 
                 if (count > 0)
                 {
-                    Task task = new Task(() => {
-                        int uid = utilities.GetUID(loginUser, passwordUser);
-                        utilities.WriteUID(uid);
-                    });
+                    int uid = utilities.GetUID(loginUser, passwordUser);
+                    utilities.WriteUID(uid);
 
                     utilities.UpdateIsAutorized(loginUser);
-
-                    task.Wait(500);
-                    task.Start();
 
                     connection.Close();
 
