@@ -29,7 +29,7 @@ namespace QuizAppProj.Create
             }           
         }
 
-        public string ReadQuizID()
+        public string GetUID()
         {
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();

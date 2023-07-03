@@ -115,6 +115,10 @@
       <DependentUpon>MixedQuiz.xaml</DependentUpon>
     </Compile>
     <Compile Include="Quizes\MixedSettings.cs" />
+    <Compile Include="UserQuizes\UserQuiz.xaml.cs">
+      <DependentUpon>UserQuiz.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserQuizes\UserQuizSettings.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ViewModelBase.cs" />
     <Compile Include="ViewModel\CreateQuizVM.cs" />
@@ -233,6 +237,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserQuizes\UserQuiz.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Utilities\DataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -309,9 +317,7 @@
     <Resource Include="Images\shutdown_mo.png" />
     <Resource Include="Images\transaction_page.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserQuizes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\crown.png" />
   </ItemGroup>
