@@ -195,7 +195,15 @@ namespace QuizAppProj.Quizes
 
             SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
 
             string query = $"SELECT biology_questions_setting, biology_time_setting, biology_count_setting FROM Users WHERE id = {uid}";
 
@@ -240,7 +248,16 @@ namespace QuizAppProj.Quizes
                 string uid = utilities.ReadUID();
 
                 SqlConnection connection = new SqlConnection(utilities.ConnectionString);
-                connection.Open();
+
+                try
+                {
+                    connection.Open();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Application.Current.Shutdown();
+                }
 
                 string query = "UPDATE Users SET biology_questions_setting = @Questions, biology_time_setting = @Time, biology_count_setting = @Count WHERE id = @UID";
 

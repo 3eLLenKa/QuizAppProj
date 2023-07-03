@@ -191,7 +191,15 @@ namespace QuizAppProj.Quizes
 
             SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
 
             string query = $"SELECT mixed_questions_setting, mixed_time_setting, mixed_count_setting FROM Users WHERE id = {uid}";
 
@@ -235,7 +243,15 @@ namespace QuizAppProj.Quizes
                 string uid = utilities.ReadUID();
 
                 SqlConnection connection = new SqlConnection(utilities.ConnectionString);
-                connection.Open();
+                try
+                {
+                    connection.Open();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Application.Current.Shutdown();
+                }
 
                 string query = "UPDATE Users SET mixed_questions_setting = @Questions, mixed_time_setting = @Time, mixed_count_setting = @Count WHERE id = @UID";
 

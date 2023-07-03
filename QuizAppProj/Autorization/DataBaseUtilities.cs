@@ -17,7 +17,15 @@ namespace QuizAppProj.Autorization
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
 
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
 
             string query = "SELECT id FROM Users WHERE login = @Login AND password = @Password";
 
@@ -63,7 +71,15 @@ namespace QuizAppProj.Autorization
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
 
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
 
             string query = "UPDATE Users SET isAutorized = 1 WHERE login = @Login";
 
@@ -81,7 +97,15 @@ namespace QuizAppProj.Autorization
 
             SqlConnection connection = new SqlConnection(ConnectionString);
 
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
 
             string query = "SELECT COUNT(*) FROM Users WHERE login = @Login";
 

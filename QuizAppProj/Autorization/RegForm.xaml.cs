@@ -30,13 +30,19 @@ namespace QuizAppProj.Autorization
         {
             DataBaseUtilities utilities = new DataBaseUtilities();
 
-            var loginUser = loginTextBox.Text;
-            var passwordUser = passwordBox.Password;
+            var loginUser = loginTextBox.Text.Trim();
+            var passwordUser = passwordBox.Password.Trim();
             string regDate = DateTime.Now.ToString();
 
             if (string.IsNullOrWhiteSpace(loginUser) || string.IsNullOrWhiteSpace(passwordUser))
             {
                 MessageBox.Show("Введите логин и пароль.", "Что - то не так...", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (loginUser.Length > 10)
+            {
+                MessageBox.Show("Логин не должен быть больше 10 символов!", "Что - то не так...", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -75,10 +81,7 @@ namespace QuizAppProj.Autorization
             {
                 string uid = utilities.ReadUID();
 
-                Task task = new Task(() => { utilities.WriteUID(-1); });
-
-                task.Wait(100);
-                task.Start();
+                utilities.WriteUID(-1); 
 
                 SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
@@ -92,6 +95,9 @@ namespace QuizAppProj.Autorization
                 command.ExecuteNonQuery();
 
                 connection.Close();
+
+                MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
             }
         }
     }

@@ -191,7 +191,15 @@ namespace QuizAppProj.Quizes
 
             SqlConnection connection = new SqlConnection(utilities.ConnectionString);
 
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
 
             string query = $"SELECT history_questions_setting, history_time_setting, history_count_setting FROM Users WHERE id = {uid}";
 
@@ -235,7 +243,15 @@ namespace QuizAppProj.Quizes
                 string uid = utilities.ReadUID();
 
                 SqlConnection connection = new SqlConnection(utilities.ConnectionString);
-                connection.Open();
+                try
+                {
+                    connection.Open();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Application.Current.Shutdown();
+                }
 
                 string query = "UPDATE Users SET history_questions_setting = @Questions, history_time_setting = @Time, history_count_setting = @Count WHERE id = @UID";
 

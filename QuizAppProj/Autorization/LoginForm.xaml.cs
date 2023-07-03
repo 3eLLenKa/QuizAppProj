@@ -23,8 +23,8 @@ namespace QuizAppProj.Autorization
         }
         private void AutorizeEventArg(object sender, EventArgs e)
         {
-            var loginUser = loginTextBox.Text;
-            var passwordUser = passwordBox.Password;
+            var loginUser = loginTextBox.Text.Trim();
+            var passwordUser = passwordBox.Password.Trim();
 
             if (string.IsNullOrWhiteSpace(loginUser) || string.IsNullOrWhiteSpace(passwordUser))
             {
@@ -69,6 +69,7 @@ namespace QuizAppProj.Autorization
             catch (Exception)
             {
                 MessageBox.Show($"Проверьте подключение к интернету", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
             }
         }
     }

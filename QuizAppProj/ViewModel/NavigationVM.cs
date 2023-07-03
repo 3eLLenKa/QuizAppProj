@@ -18,9 +18,9 @@ namespace QuizAppProj.ViewModel
         }
 
         public ICommand HomeCommand { get; set; }
-        public ICommand CustomersCommand { get; set; }
+        public ICommand UserCommand { get; set; }
         public ICommand TopCommand { get; set; }
-        public ICommand OrdersCommand { get; set; }
+        public ICommand CreateCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
 
         private void Home(object obj) => CurrentView = new HomeVM();
@@ -32,9 +32,9 @@ namespace QuizAppProj.ViewModel
         public NavigationVM()
         {
             HomeCommand = new RelayCommand(Home);
-            CustomersCommand = new RelayCommand(User);
+            UserCommand = new RelayCommand(User);
             TopCommand = new RelayCommand(Top);
-            OrdersCommand = new RelayCommand(CreateQuiz);
+            CreateCommand = new RelayCommand(CreateQuiz);
             SettingsCommand = new RelayCommand(Settings);
 
             // Startup Page

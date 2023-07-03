@@ -198,7 +198,15 @@ namespace QuizAppProj.Quizes
             string uid = utilities.ReadUID();
 
             SqlConnection connection = new SqlConnection(utilities.ConnectionString);
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
 
             string query = "UPDATE Users SET history_result = history_result + @Result, sum_result = mixed_result + biology_result + geography_result + history_result WHERE id = @UID";
 
