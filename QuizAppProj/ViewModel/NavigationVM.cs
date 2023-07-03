@@ -19,11 +19,13 @@ namespace QuizAppProj.ViewModel
 
         public ICommand HomeCommand { get; set; }
         public ICommand CustomersCommand { get; set; }
+        public ICommand TopCommand { get; set; }
         public ICommand OrdersCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
 
         private void Home(object obj) => CurrentView = new HomeVM();
         private void User(object obj) => CurrentView = new UserVM();
+        private void Top(object obj) => CurrentView = new TopVM();
         private void CreateQuiz(object obj) => CurrentView = new CreateQuizVM();
         private void Settings(object obj) => CurrentView = new SettingsVM();
 
@@ -31,6 +33,7 @@ namespace QuizAppProj.ViewModel
         {
             HomeCommand = new RelayCommand(Home);
             CustomersCommand = new RelayCommand(User);
+            TopCommand = new RelayCommand(Top);
             OrdersCommand = new RelayCommand(CreateQuiz);
             SettingsCommand = new RelayCommand(Settings);
 

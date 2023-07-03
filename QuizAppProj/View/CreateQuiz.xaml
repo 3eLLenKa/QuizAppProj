@@ -5,8 +5,79 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuizAppProj.View"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="622">
+             d:DesignHeight="600" d:DesignWidth="622"
+             Style="{StaticResource Page_Style}">
+
     <Grid>
-            
+        <Border CornerRadius="0,20,20,0" Margin="0,5,5,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="622" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="263"/>
+                    <RowDefinition Height="359"/>
+                </Grid.RowDefinitions>
+                <TextBlock TextWrapping="Wrap" Text="Создать викторину" FontSize="25" Margin="23,10,10,0" Foreground="White"/>
+                <Button x:Name="firstSlot" Click="FirstSlot" Grid.Row="1" Margin="23,26,22,25">
+                    <Grid Width="248">
+                        <TextBlock Text="Untitled" FontSize="20" Foreground="White" Margin="10,10,121,165"/>
+                    </Grid>
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Color="#5bc3ff" Offset="0.0"/>
+                            <GradientStop Color="#3aa0ff" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Clip>
+                        <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,255,210"/>
+                    </Button.Clip>
+                </Button>
+                <Button x:Name="secondSlot" Click="SecondSlot" Grid.Row="1" Margin="23,26,345,25" Grid.Column="1">
+                    <Grid Height="202" Width="244">
+                        <TextBlock Text="Untitled" FontSize="20" Foreground="White" Margin="10,10,121,165"/>
+                    </Grid>
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Color="#5bc3ff" Offset="0.0"/>
+                            <GradientStop Color="#3aa0ff" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Clip>
+                        <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,255,210"/>
+                    </Button.Clip>
+                </Button>
+                <Button x:Name="thirdSlot" Click="ThirdSlot" Grid.Row="2" Margin="23,23,22,124">
+                    <Grid Height="202" Width="244">
+                        <TextBlock Text="Untitled" FontSize="20" Foreground="White" Margin="10,10,121,165"/>
+                    </Grid>
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Color="#5bc3ff" Offset="0.0"/>
+                            <GradientStop Color="#3aa0ff" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Clip>
+                        <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,255,210"/>
+                    </Button.Clip>
+                </Button>
+                <Button x:Name="fourthSlot" Click="FourthSlot" Grid.Row="2" Margin="22,23,345,124" Grid.Column="1">
+                    <Grid Height="202" Width="244">
+                        <TextBlock Text="Untitled" FontSize="20" Foreground="White" Margin="10,10,7,165"/>
+                    </Grid>
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Color="#5bc3ff" Offset="0.0"/>
+                            <GradientStop Color="#3aa0ff" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Clip>
+                        <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,255,210"/>
+                    </Button.Clip>
+                </Button>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

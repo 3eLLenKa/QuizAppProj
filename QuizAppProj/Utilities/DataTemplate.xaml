@@ -19,4 +19,8 @@
         <view:Settings/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:TopVM}">
+        <view:Top/>
+    </DataTemplate>
+
 </ResourceDictionary>

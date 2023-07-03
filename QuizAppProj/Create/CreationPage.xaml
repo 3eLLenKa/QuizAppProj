@@ -1,0 +1,51 @@
+﻿<Page x:Class="QuizAppProj.Create.CreationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuizAppProj.Create"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="850"
+      Title="CreationPage">
+
+    <Grid>
+        <Border Background="#212529" CornerRadius="20" Grid.RowSpan="6"/>
+        <TextBlock TextWrapping="Wrap" Text="Создание викторины" FontSize="25" Margin="23,10,10,0" Foreground="White"/>
+
+        <TextBlock Visibility="Visible" Grid.Row="1" TextWrapping="Wrap" Text="Введите название:" FontSize="20" Margin="23,26,649,27" Foreground="White"/>
+        <TextBox x:Name="quizNameTextBox" Visibility="Visible" Grid.Row="1" Margin="206,30,61,30"/>
+
+        <TextBlock Visibility="Visible" Grid.Row="2" TextWrapping="Wrap" Text="Выберите количество вопросов:" FontSize="20" Margin="23,26,520,27" Foreground="White"/>
+
+        <TextBlock x:Name="savedName" Visibility="Hidden" Grid.Row="1" TextWrapping="Wrap" FontSize="20" Margin="206,25,466,27" Foreground="White"/>
+        <TextBlock x:Name="savedCount" Visibility="Hidden" Grid.Row="2" FontSize="20" Margin="336,26,429,26" Foreground="White"/>
+
+        <TextBlock x:Name="countTextBlock" Text="Сохранено вопросов: 0" Foreground="White" Visibility="Hidden" Margin="23,10,674,52" Grid.Row="3"/>
+
+        <Button x:Name="saveButton" Click="SaveClick" Visibility="Visible" Grid.Row="5" Content="Сохранить" Margin="362,139,362,25"/>
+        <Button x:Name="continueButton" Click="ContinueClick" Visibility="Hidden" Grid.Row="5" Content="Продолжить" Margin="362,139,362,25"/>
+        <Button x:Name="publishButton" Click="PublishClick" Visibility="Hidden" Grid.Row="5" Content="Опубликовать" Margin="362,139,362,25"/>
+
+        <TextBlock x:Name="questionAddTextBlock" Visibility="Hidden" Grid.Row="3" TextWrapping="Wrap" Text="Введите вопрос:" FontSize="20" Margin="23,37,674,16" Foreground="White"/>
+        <TextBox x:Name="questionAddTextBox" Visibility="Hidden" Grid.Row="3" Margin="181,42,61,18"/>
+
+        <TextBlock x:Name="answerAddTextBlock" Visibility="Hidden" Grid.Row="4" TextWrapping="Wrap" Text="Введите варианты ответов через запятую: (возле правильных ответов ставьте знак +, пример: ответ+)" FontSize="15" Margin="23,22,449,10" Foreground="White"/>
+        <TextBox x:Name="answerAddTextBox" Visibility="Hidden" Grid.Row="4" Margin="406,21,87,39"/>
+
+        <ComboBox x:Name="countAnswers" Visibility="Visible" Margin="335,26,429,27" Grid.Row="2">
+            <ComboBoxItem Content="5"/>
+            <ComboBoxItem Content="10"/>
+            <ComboBoxItem Content="15"/>
+        </ComboBox>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="42*"/>
+            <RowDefinition Height="42*"/>
+            <RowDefinition Height="42*"/>
+            <RowDefinition Height="42*"/>
+            <RowDefinition Height="103*"/>
+
+        </Grid.RowDefinitions>
+    </Grid>
+</Page>

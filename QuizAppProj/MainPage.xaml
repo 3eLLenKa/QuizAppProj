@@ -44,6 +44,13 @@
                         </Grid>
                     </RadioButton>
 
+                    <RadioButton Style="{StaticResource BtnStyle}" Command="{Binding TopCommand}">
+                        <Grid>
+                            <Image Source="Images/crown.png" Style="{StaticResource Image_Style}" />
+                            <TextBlock Text="Топ игроков" Style="{StaticResource Text_Style}" />
+                        </Grid>
+                    </RadioButton>
+
                     <!-- Создать квиз -->
 
                     <RadioButton Style="{StaticResource BtnStyle}" Command="{Binding OrdersCommand}">
@@ -52,15 +59,14 @@
                             <TextBlock Text="Создать квиз" Style="{StaticResource Text_Style}" />
                         </Grid>
                     </RadioButton>
-
-                    <!-- Настройки -->
-
                     <RadioButton Style="{StaticResource BtnStyle}" Command="{Binding SettingsCommand}">
                         <Grid>
                             <Image Source="Images/img_setting.png" Style="{StaticResource Image_Style}" />
                             <TextBlock Text="Настройки" Style="{StaticResource Text_Style}" />
                         </Grid>
                     </RadioButton>
+
+                    <!-- Настройки -->
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1">
