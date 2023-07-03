@@ -1,22 +1,9 @@
 ﻿using QuizAppProj.Autorization;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QuizAppProj
 {
@@ -49,13 +36,13 @@ namespace QuizAppProj
                 DataBaseUtilities utilities = new DataBaseUtilities();
                 string uid = utilities.ReadUID();
 
-                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+                MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
                 connection.Open();
 
                 string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@UID", uid);
                 command.ExecuteNonQuery();
@@ -80,17 +67,17 @@ namespace QuizAppProj
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
             connection.Open();
 
             string query = "SELECT COUNT(*) FROM Users WHERE id = @UID AND isAutorized = 1";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UID", uid);
 
-            int count = (int)command.ExecuteScalar();
+            int count = Convert.ToInt32(command.ExecuteScalar());
 
             if (count > 0)
             {

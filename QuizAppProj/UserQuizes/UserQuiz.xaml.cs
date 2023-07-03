@@ -1,20 +1,12 @@
 ﻿using QuizAppProj.Autorization;
-using QuizAppProj.Quizes;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace QuizAppProj.UserQuizes
@@ -198,12 +190,12 @@ namespace QuizAppProj.UserQuizes
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
             connection.Open();
 
             string query = "UPDATE Users SET biology_result = biology_result + @Result, sum_result = mixed_result + biology_result + geography_result + history_result WHERE id = @UID";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@Result", points);
             command.Parameters.AddWithValue("@UID", uid);

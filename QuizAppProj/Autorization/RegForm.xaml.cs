@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace QuizAppProj.Autorization
 {
@@ -53,13 +42,13 @@ namespace QuizAppProj.Autorization
 
             try
             {
-                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+                MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
                 connection.Open();
 
                 string query = "INSERT INTO Users(login, password, is_admin, isAutorized, reg_date) values(@Login, @Password, 0, 1, @RegDate)";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@Login", loginUser);
                 command.Parameters.AddWithValue("@Password", passwordUser);
@@ -83,13 +72,13 @@ namespace QuizAppProj.Autorization
 
                 utilities.WriteUID(-1); 
 
-                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+                MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
                 connection.Open();
 
                 string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@UID", uid);
                 command.ExecuteNonQuery();

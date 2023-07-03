@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -35,18 +34,18 @@ namespace QuizAppProj.Autorization
             try
             {
                 DataBaseUtilities utilities = new DataBaseUtilities();
-                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+                MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
                 connection.Open();
 
                 string query = "SELECT COUNT(*) FROM Users WHERE login = @Login AND password = @Password AND isAutorized = 0";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@Login", loginUser);
                 command.Parameters.AddWithValue("@Password", passwordUser);
 
-                int count = (int)command.ExecuteScalar();
+                int count = Convert.ToInt32(command.ExecuteScalar());
 
                 if (count > 0)
                 {

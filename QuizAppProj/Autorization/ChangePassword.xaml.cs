@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QuizAppProj.Autorization
 {
@@ -33,12 +23,14 @@ namespace QuizAppProj.Autorization
             var newPassword = passwordTextBox.Text.Trim();
             var uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            utilities.WriteUID(-1);
+
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
             connection.Open();
 
             string query = "UPDATE Users SET password = @NewPass WHERE id = @UID";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UID", uid);
             command.Parameters.AddWithValue("@NewPass", newPassword);
@@ -46,7 +38,7 @@ namespace QuizAppProj.Autorization
             command.ExecuteNonQuery();
             connection.Close();
 
-            MessageBox.Show($"Ваш логин успешно изменен на {newPassword}", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show($"Ваш пароль успешно изменен на {newPassword}", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
             NavigationService.Navigate(new LoginForm());
         }
     }

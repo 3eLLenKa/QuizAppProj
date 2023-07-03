@@ -37,7 +37,6 @@ namespace QuizAppProj.ViewModel
             CreateCommand = new RelayCommand(CreateQuiz);
             SettingsCommand = new RelayCommand(Settings);
 
-            // Startup Page
             CurrentView = new HomeVM();
         }
     }

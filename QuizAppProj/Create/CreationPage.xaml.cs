@@ -1,21 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
 using QuizAppProj.Autorization;
-using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QuizAppProj.Create
 {
@@ -137,12 +128,12 @@ namespace QuizAppProj.Create
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
             connection.Open();
 
             string query = "Insert into UserQuizes(QuizName, UserID, Questions, CorrectAnswers, Answers) values(@Name, @UID, @Questions, @Correct, @Answers)";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@Name", quizNameTextBox.Text);
             command.Parameters.AddWithValue("@UID", uid);

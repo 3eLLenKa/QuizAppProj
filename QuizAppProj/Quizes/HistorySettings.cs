@@ -127,7 +127,7 @@ namespace QuizAppProj.Quizes
         };
         public HistorySettings()
         {
-            if (settings.Count == 0) { MessageBox.Show("error epta :("); }
+            if (settings.Count == 0) { MessageBox.Show("error :("); }
             for (int i = 0; i < settings.Count; i++)
             {
                 switch (settings.ElementAt(i))

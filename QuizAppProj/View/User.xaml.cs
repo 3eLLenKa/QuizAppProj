@@ -1,19 +1,7 @@
 ﻿using QuizAppProj.Autorization;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using MySql.Data.MySqlClient;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QuizAppProj.View
 {
@@ -44,13 +32,13 @@ namespace QuizAppProj.View
                 DataBaseUtilities utilities = new DataBaseUtilities();
                 string uid = utilities.ReadUID();
 
-                SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
+                MySqlConnection connection = new MySqlConnection(@"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True");
 
                 connection.Open();
 
                 string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@UID", uid);
                 command.ExecuteNonQuery();
@@ -64,13 +52,13 @@ namespace QuizAppProj.View
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
             connection.Open();
 
             string query = "SELECT reg_date FROM Users WHERE id = @UID";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UID", uid);
 
@@ -85,13 +73,13 @@ namespace QuizAppProj.View
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
             connection.Open();
 
             string query = "SELECT login FROM Users WHERE id = @UID";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UID", uid);
 
@@ -107,13 +95,13 @@ namespace QuizAppProj.View
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
             connection.Open();
 
             string query = "SELECT biology_result FROM Users WHERE id = @UID";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UID", uid);
 
@@ -128,13 +116,13 @@ namespace QuizAppProj.View
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
             connection.Open();
 
             string query = "SELECT history_result FROM Users WHERE id = @UID";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UID", uid);
 
@@ -149,13 +137,13 @@ namespace QuizAppProj.View
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
             connection.Open();
 
             string query = "SELECT geography_result FROM Users WHERE id = @UID";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UID", uid);
 
@@ -170,13 +158,13 @@ namespace QuizAppProj.View
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
             connection.Open();
 
             string query = "SELECT mixed_result FROM Users WHERE id = @UID";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UID", uid);
 
@@ -192,13 +180,13 @@ namespace QuizAppProj.View
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
             connection.Open();
 
             string query = "SELECT sum_result FROM Users WHERE id = @UID";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UID", uid);
 

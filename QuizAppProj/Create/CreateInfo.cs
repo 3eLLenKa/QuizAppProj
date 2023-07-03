@@ -1,11 +1,6 @@
 ﻿using QuizAppProj.Autorization;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuizAppProj.Create
 {
@@ -34,12 +29,12 @@ namespace QuizAppProj.Create
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
             connection.Open();
 
             string query = "select QuizID from UserQuizes where UserID = @UID, QuizName = @Name";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UID", uid);
             command.Parameters.AddWithValue("@Name", savedName.Text);

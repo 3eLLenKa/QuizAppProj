@@ -23,7 +23,7 @@ namespace QuizAppProj.View
     /// </summary>
     public partial class CreateQuiz : UserControl
     {
-        List<TextBlock> buttonList;
+        //List<TextBlock> buttonList;
         public CreateQuiz()
         {
             InitializeComponent();

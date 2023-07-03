@@ -1,19 +1,9 @@
 ﻿using QuizAppProj.Autorization;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QuizAppProj.View
 {
@@ -34,19 +24,18 @@ namespace QuizAppProj.View
         private Dictionary<string, int> GetTopUsers()
         {
             DataBaseUtilities utilities = new DataBaseUtilities();
-            string uid = utilities.ReadUID();
 
             Dictionary<string, int> mas = new Dictionary<string, int>();
 
-            using (SqlConnection connection = new SqlConnection(utilities.ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(utilities.ConnectionString))
             {
                 connection.Open();
 
-                string query = "SELECT TOP 3 login, sum_result FROM Users ORDER BY sum_result DESC;";
+                string query = "SELECT login, sum_result FROM Users ORDER BY sum_result DESC LIMIT 3;";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
-                SqlDataReader reader = command.ExecuteReader();
+                MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {

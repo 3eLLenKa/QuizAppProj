@@ -1,22 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Threading;
-using System.Windows.Shapes;
-using System.Runtime.InteropServices.ComTypes;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using QuizAppProj.Autorization;
 
 namespace QuizAppProj.Quizes
@@ -193,7 +180,7 @@ namespace QuizAppProj.Quizes
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
             try
             {
@@ -207,8 +194,8 @@ namespace QuizAppProj.Quizes
 
             string query = $"SELECT biology_questions_setting, biology_time_setting, biology_count_setting FROM Users WHERE id = {uid}";
 
-            SqlCommand command = new SqlCommand(query, connection);
-            SqlDataReader reader = command.ExecuteReader();
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader reader = command.ExecuteReader();
 
             reader.Read();
 
@@ -247,7 +234,7 @@ namespace QuizAppProj.Quizes
                 DataBaseUtilities utilities = new DataBaseUtilities();
                 string uid = utilities.ReadUID();
 
-                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+                MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
                 try
                 {
@@ -261,7 +248,7 @@ namespace QuizAppProj.Quizes
 
                 string query = "UPDATE Users SET biology_questions_setting = @Questions, biology_time_setting = @Time, biology_count_setting = @Count WHERE id = @UID";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@UID", uid);
                 command.Parameters.AddWithValue("@Questions", customCheckedBoxes[0].Name);

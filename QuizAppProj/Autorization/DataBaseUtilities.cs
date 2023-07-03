@@ -1,21 +1,16 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
 using System.Windows;
+using MySql.Data.MySqlClient;
 
 namespace QuizAppProj.Autorization
 {
     internal class DataBaseUtilities
     {
-        public readonly string ConnectionString = @"Data Source=DESKTOP-HCK9T1F\SQLEXPRESS;Initial Catalog=QuizDB;Integrated Security=True";
+        public readonly string ConnectionString = @"Server=89.108.76.66;Port=3306;Database=QuizDB;Uid=admin;Pwd=L!:MeXtyoMJ4;";
         public int GetUID(object userLogin, object userPassword) 
         {
-            SqlConnection connection = new SqlConnection(ConnectionString);
+            MySqlConnection connection = new MySqlConnection(ConnectionString);
 
             try
             {
@@ -29,12 +24,12 @@ namespace QuizAppProj.Autorization
 
             string query = "SELECT id FROM Users WHERE login = @Login AND password = @Password";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@Login", userLogin);
             command.Parameters.AddWithValue("@Password", userPassword);
 
-            int count = (int)command.ExecuteScalar();
+            int count = Convert.ToInt32(command.ExecuteScalar());
 
             if (count > 0)
             {
@@ -69,7 +64,7 @@ namespace QuizAppProj.Autorization
 
         public void UpdateIsAutorized(string userLogin)
         {
-            SqlConnection connection = new SqlConnection(ConnectionString);
+            MySqlConnection connection = new MySqlConnection(ConnectionString);
 
             try
             {
@@ -83,7 +78,7 @@ namespace QuizAppProj.Autorization
 
             string query = "UPDATE Users SET isAutorized = 1 WHERE login = @Login";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@Login", userLogin);
 
@@ -95,7 +90,7 @@ namespace QuizAppProj.Autorization
         {
             login = login.Trim();
 
-            SqlConnection connection = new SqlConnection(ConnectionString);
+            MySqlConnection connection = new MySqlConnection(ConnectionString);
 
             try
             {
@@ -109,11 +104,11 @@ namespace QuizAppProj.Autorization
 
             string query = "SELECT COUNT(*) FROM Users WHERE login = @Login";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@Login", login);
 
-            int count = (int)command.ExecuteScalar();
+            int count = Convert.ToInt32(command.ExecuteScalar());
 
             if (count > 0)
             {

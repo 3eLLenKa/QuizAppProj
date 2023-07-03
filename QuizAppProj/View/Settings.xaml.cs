@@ -1,19 +1,9 @@
 ﻿using QuizAppProj.Autorization;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QuizAppProj.View
 {
@@ -37,9 +27,7 @@ namespace QuizAppProj.View
 
                 string uid = utilities.ReadUID();
 
-                utilities.WriteUID(-1);
-
-                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+                MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
                 try
                 {
@@ -53,7 +41,7 @@ namespace QuizAppProj.View
 
                 string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@UID", uid);
                 command.ExecuteNonQuery();
@@ -74,9 +62,7 @@ namespace QuizAppProj.View
 
                 string uid = utilities.ReadUID();
 
-                utilities.WriteUID(-1);
-
-                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+                MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
                 try
                 {
@@ -90,7 +76,7 @@ namespace QuizAppProj.View
 
                 string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@UID", uid);
                 command.ExecuteNonQuery();
@@ -113,7 +99,7 @@ namespace QuizAppProj.View
 
                 utilities.WriteUID(-1);
 
-                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+                MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
                 try
                 {
@@ -127,7 +113,7 @@ namespace QuizAppProj.View
 
                 string query = "UPDATE Users SET isAutorized = 0 WHERE id = @UID";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@UID", uid);
                 command.ExecuteNonQuery();
@@ -151,7 +137,7 @@ namespace QuizAppProj.View
 
                 utilities.WriteUID(-1);
 
-                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+                MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
                 try
                 {
@@ -165,7 +151,7 @@ namespace QuizAppProj.View
 
                 string query = "DELETE FROM Users WHERE id = @UID";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@UID", uid);
                 command.ExecuteNonQuery();

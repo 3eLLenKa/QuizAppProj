@@ -1,19 +1,10 @@
 ﻿using QuizAppProj.Autorization;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QuizAppProj.Quizes
 {
@@ -189,7 +180,7 @@ namespace QuizAppProj.Quizes
             DataBaseUtilities utilities = new DataBaseUtilities();
             string uid = utilities.ReadUID();
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
             try
             {
@@ -203,8 +194,8 @@ namespace QuizAppProj.Quizes
 
             string query = $"SELECT geography_questions_setting, geography_time_setting, geography_count_setting FROM Users WHERE id = {uid}";
 
-            SqlCommand command = new SqlCommand(query, connection);
-            SqlDataReader reader = command.ExecuteReader();
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader reader = command.ExecuteReader();
 
             reader.Read();
 
@@ -243,7 +234,7 @@ namespace QuizAppProj.Quizes
                 DataBaseUtilities utilities = new DataBaseUtilities();
                 string uid = utilities.ReadUID();
 
-                SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+                MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
 
                 try
                 {
@@ -257,7 +248,7 @@ namespace QuizAppProj.Quizes
 
                 string query = "UPDATE Users SET geography_questions_setting = @Questions, geography_time_setting = @Time, geography_count_setting = @Count WHERE id = @UID";
 
-                SqlCommand command = new SqlCommand(query, connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@UID", uid);
                 command.Parameters.AddWithValue("@Questions", customCheckedBoxes[0].Name);

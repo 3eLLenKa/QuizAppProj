@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QuizAppProj.Autorization
 {
@@ -33,17 +23,19 @@ namespace QuizAppProj.Autorization
             var newLogin = loginTextBox.Text.Trim();
             var uid = utilities.ReadUID();
 
+            utilities.WriteUID(-1);
+
             if (utilities.CheckUser(newLogin))
             {
                 return;
             }
 
-            SqlConnection connection = new SqlConnection(utilities.ConnectionString);
+            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
             connection.Open();
 
-            string query = "UPDATE Users SET login = @NewLogin WHERE id = @UID";
+            string query = "UPDATE Users SET login = @NewLogin where id = @UID;";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UID", uid);
             command.Parameters.AddWithValue("@NewLogin", newLogin);
