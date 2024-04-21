@@ -15,9 +15,9 @@ namespace QuizAppProj
         public static MainWindow window;
         public MainWindow()
         {
-            FileInfo info = new FileInfo(@"D:\session.txt");
+            //FileInfo info = new FileInfo(@"D:\session.txt");
 
-            if (!info.Exists) { File.WriteAllText(@"D:\session.txt", "0"); }
+            //if (!info.Exists) { File.WriteAllText(@"D:\session.txt", "0"); }
 
             try
             {
@@ -25,11 +25,11 @@ namespace QuizAppProj
 
                 InitializeComponent();
 
-                if (!CheckSession())
-                {
-                    MainFrame.Content = new LoginForm();
-                }
-                else MainFrame.Content = new MainPage();
+                //if (!CheckSession())
+                //{
+                    MainFrame.Content = new MainPage();
+                //}
+                //else MainFrame.Content = new MainPage();
             }
             catch (Exception)
             {
@@ -64,27 +64,36 @@ namespace QuizAppProj
 
         private bool CheckSession()
         {
-            DataBaseUtilities utilities = new DataBaseUtilities();
-            string uid = utilities.ReadUID();
-
-            MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
-
-            connection.Open();
-
-            string query = "SELECT COUNT(*) FROM Users WHERE id = @UID AND isAutorized = 1";
-
-            MySqlCommand command = new MySqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@UID", uid);
-
-            int count = Convert.ToInt32(command.ExecuteScalar());
-
-            if (count > 0)
+            try
             {
-                connection.Close();
-                return true;
+                DataBaseUtilities utilities = new DataBaseUtilities();
+                string uid = utilities.ReadUID();
+
+                MySqlConnection connection = new MySqlConnection(utilities.ConnectionString);
+
+                connection.Open();
+
+                string query = "SELECT COUNT(*) FROM Users WHERE id = @UID AND isAutorized = 1";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@UID", uid);
+
+                int count = Convert.ToInt32(command.ExecuteScalar());
+
+                if (count > 0)
+                {
+                    connection.Close();
+                    return true;
+                }
+                else { connection.Close(); return false; }
             }
-            else { connection.Close(); return false; }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте подключение к интернету!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                App.Current.Shutdown();
+                return false;
+            }
         }
     }
 }
